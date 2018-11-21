@@ -6,6 +6,8 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import axios from 'axios'
+
+
 Vue.prototype.$http = axios
 
 Vue.use(Vuetify)

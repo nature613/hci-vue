@@ -1,0 +1,75 @@
+<template>
+  <div>
+    <Toolbar></Toolbar>
+    <v-container>
+      <v-layout column>
+        <v-flex>
+          <v-text-field
+            label="search"
+            outline
+          ></v-text-field>
+        </v-flex>
+        <v-flex text-xs-center>
+          <h1>simple</h1>
+        </v-flex>
+        <v-flex>
+          <v-textarea
+          outline>
+          </v-textarea>
+        </v-flex>
+        <v-flex>
+          <v-text-field
+            label="O"
+            outline
+          ></v-text-field>
+        </v-flex>
+        <v-flex>
+          <v-text-field
+            label="X"
+            outline
+          ></v-text-field>
+        </v-flex>
+        <v-flex>
+          
+           <v-expansion-panel
+              v-model="panel"
+              expand
+            >
+              <v-expansion-panel-content
+                v-for="(item, i) in 1"
+                :key="i"
+              >
+                <div slot="header">
+                  <v-layout column>
+                    <v-flex>
+                      투표자 추가 정보
+                    </v-flex>
+                  </v-layout>
+                </div>
+                <v-card>
+                  <v-card-text class="grey lighten-3">mm</v-card-text>
+                </v-card>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+
+        </v-flex>
+        <v-flex>
+          <v-btn block>등록</v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </div>
+</template>
+<script>
+import Toolbar from './Toolbar.vue'
+export default {
+  name: 'SimpleWrite',
+  components:{
+    Toolbar
+  }
+}
+</script>
+<style>
+
+</style>
