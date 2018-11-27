@@ -11,7 +11,15 @@ import SimpleWrite from '@/components/SimpleWrite'
 import DeepWrite from '@/components/DeepWrite'
 import Toolbar from '@/components/Toolbar'
 
+
 Vue.use(Router)
+
+const requireAuth = () => (from, to, next) => {
+  const isAuthenticated = false
+  if (isAuthenticated) return next()
+  next('/login?returnPath=me')
+  // next('/')
+}
 
 export default new Router({
   mode: 'history',

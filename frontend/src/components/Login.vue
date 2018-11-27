@@ -6,27 +6,26 @@
         <h1 >LOGO</h1>
       </v-flex>
       <v-flex>
-        <v-form v-model="valid" action="/api/login-process" method="post">
+        <v-form>
           <v-text-field
             v-model="inputId"
-            :rules="nameRules"
             :counter="10"
             label="아이디"
             required
           ></v-text-field>
           <v-text-field
             v-model="inputPw"
-            :rules="emailRules"
             label="비밀번호"
             type="password"
             required
           ></v-text-field>
-          <v-btn type="submit" block color="secondary">로그인</v-btn>
+          <v-btn v-on:click="loginProcess(inputId, inputPw)" block color="secondary">로그인</v-btn>
         </v-form>
       </v-flex>
       <v-flex>
         <v-btn href="/sign-page">회원가입</v-btn>
       </v-flex>
+      <p>test ::::: {{test}}</p>
     </v-layout>
   </v-container>
 </div>
@@ -37,7 +36,30 @@ export default {
   data: function(){
     return{
       inputPw : '',
-      inputId : ''
+      inputId : '',
+      test : '',
+      msg : ''
+    }
+  },
+  methods:{
+    // loginProcess: function(){
+    //   this.$http.post('/user/login',
+    //   {
+    //     loginId:this.inputId,
+    //     loginPw:this.inputPw
+    //   }).then((response)=>{
+    //     if(response.status === 200 && 'userName' in response.body){
+    //       console.log(response.body)
+    //       this.test = 'success'
+    //     }else{
+    //       this.test = 'fail'
+    //     }
+    //   })
+    // }
+    loginProcess : function(loginId,loginPw){
+      this.$store.dispatch('LOGIN',{loginId, loginPw})
+        .then(()=>this.$router.push('/simple-deep'))
+        .catch(({message}) => this.msg = message)
     }
   }
 }
@@ -45,3 +67,8 @@ export default {
 <style>
 
 </style>
+
+
+this.axios.get('http://localhost:8000/doctor/list').then((response)=>{
+        this.doctorList = response.data
+      })

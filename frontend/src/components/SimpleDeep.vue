@@ -10,7 +10,7 @@
           <v-btn class="simpleDeepBtn" href="/deep" block >deep</v-btn>
         </v-flex>
       </v-layout>
-    </v-container>
+    </v-container> 
   </div>
 </template>
 <script>

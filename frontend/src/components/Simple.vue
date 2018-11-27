@@ -11,7 +11,7 @@
         </v-flex>
         <v-flex mb-3>
           <v-btn href="/simple-write" block>
-            글쓰기
+            글쓰기 
           </v-btn>
         </v-flex>
 

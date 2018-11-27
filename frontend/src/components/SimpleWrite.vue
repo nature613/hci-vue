@@ -13,7 +13,7 @@
           <h1>simple</h1>
         </v-flex>
         <v-flex>
-          <v-textarea
+          <v-textarea 
           outline>
           </v-textarea>
         </v-flex>

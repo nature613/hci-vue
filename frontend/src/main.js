@@ -6,8 +6,13 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import axios from 'axios'
+import VueSession from 'vue-session'
+// import store from './store.js'
+import store from './store/index.js'
 
 
+
+Vue.use(VueSession)
 Vue.prototype.$http = axios
 
 Vue.use(Vuetify)
@@ -18,6 +23,8 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  
 })
