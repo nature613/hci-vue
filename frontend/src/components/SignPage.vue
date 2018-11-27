@@ -10,6 +10,8 @@
               id="signName"
               name="signName"
               v-model="signName"
+              :rules="[() => !!signName || 'This field is required']"
+              required
             ></v-text-field>
           </v-flex>
           <v-flex>
@@ -18,6 +20,8 @@
               id="signId"
               name="signId"
               v-model="signId"
+              :rules="[() => !!signId || 'This field is required']"
+              required
             ></v-text-field>
           </v-flex>
           <v-flex>
@@ -27,6 +31,8 @@
               name="signPw"
               v-model="signPw"
               type="password"
+              :rules="[() => !!signPw || 'This field is required']"
+              required
             ></v-text-field>
           </v-flex>
           <v-flex>
@@ -36,17 +42,18 @@
               name="signPwRe"
               v-model="signPwRe"
               type="password"
+              :rules="[() => !!signPwRe || 'This field is required']"
+              required
             ></v-text-field>
           </v-flex>
           <p>성별은요?</p>
           <v-layout row>
-            <!-- <v-flex>
-              <v-btn block>남자</v-btn>
-            </v-flex>
-            <v-flex>
-              <v-btn block>여자</v-btn>
-            </v-flex> -->
-            <v-radio-group v-model="signGender" :mandatory="false" row>
+            <v-radio-group 
+              v-model="signGender" 
+              :mandatory="false" 
+              :rules="[() => !!signGender || 'This field is required']"
+              required
+              row>
               <v-radio label="남자" value="남자"></v-radio>
               <v-radio label="여자" value="여자"></v-radio>
             </v-radio-group>
@@ -59,46 +66,38 @@
               id="signBirth"
               name="signBirth"
               v-model="signBirth"
+              :rules="[() => !!signBirth || 'This field is required']"
+              required
             ></v-text-field>
           </v-flex>
           <p>결혼하셨나요?</p>
           <v-layout row>
-            <!-- <v-flex>
-              <v-btn block>기혼</v-btn>
-            </v-flex>
-            <v-flex>
-              <v-btn block>미혼</v-btn>
-            </v-flex> -->
-            <v-radio-group v-model="signMarry" :mandatory="false" row>
+            <v-radio-group 
+              v-model="signMarry" 
+              :mandatory="false" 
+              :rules="[() => !!signMarry || 'This field is required']"
+              required
+              row>
               <v-radio label="미혼" value="미혼"></v-radio>
               <v-radio label="기혼" value="기혼"></v-radio>
             </v-radio-group>
           </v-layout>
           <v-flex>
             <label for="signJob">직업은요?</label>
-            <!-- <select id="signJob" name="signJob" required>
-              <option>학생</option>
-              <option>주부</option>
-              <option>회사원</option>
-              <option>등등</option>
-            </select> -->
-            <v-select v-model="signJob"
+            <v-select 
+              v-model="signJob"
               :items="jobs"
-              
+              :rules="[() => !!signJob || 'This field is required']"
+              required
             ></v-select>
           </v-flex>
           <v-flex>
             <label for="signLive">사는 곳</label>
-            <!-- <select id="signLive" name="signLive">
-              <option>서울특별시</option>
-              <option>경기도</option>
-              <option>강원도</option>
-              <option>전라도</option>
-              <option>경상도</option>
-            </select> -->
-             <v-select v-model="signLive"
-              :items="lives"
-              
+             <v-select 
+              v-model="signLive"
+              :items="lives" 
+              :rules="[() => !!signLive || 'This field is required']"
+              required
             ></v-select>
           </v-flex>
           <v-flex>
@@ -120,6 +119,7 @@
         </v-layout>
       </v-container>
     </v-form>
+    <p>*****test value*****</p>
     <p>signName : {{signName}}</p>
     <p>signId : {{signId}}</p>
     <p>signPw : {{signPw}}</p>
@@ -129,6 +129,7 @@
     <p>signMarry: {{signMarry}}</p>
     <p>signGender: {{signGender}}</p>
     <p>signBirth: {{signBirth}}</p>
+    <p>*****test value*****</p>
   </div>
 </template>
 <script>
@@ -142,8 +143,8 @@ export default {
   data: function(){
     return {
       selected:'',
-      jobs :['학생','주부','회사원'],
-      lives : ['서울특별시','경기도','강원도','전라도','경상도'],
+      jobs :['무직','중학생','고등학생','대학생','주부','회사원','자영업자','예체능계열','기타'],
+      lives : ['서울특별시','경기도','강원도','충청남도','충청북도','전라북도','전라남도','경상북도','경상남도','제주도'],
       dialog: false,
       signName: '',
       signId: '',
@@ -158,20 +159,29 @@ export default {
   },
   methods:{
     signProcess:function(){
-      this.axios.post('http//localhost:3000/sign-process',
-        {
-          signName: this.signName,
-          signId: this.singId,
-          signPw: this.signPw,
-          signPwRe: this.signPwRe,
-          signGender: this.signGender,
-          signMarry: this.signMarry,
-          signJob: this.signJob,
-          signLive: this.signLive,
-        }
-      ).then((response)=>{
-        
-      })
+      if(this.signPw === this.signPwRe){
+        this.$http.post('/users/sign-process',
+          {
+            signName: this.signName,
+            signId: this.signId,
+            signPw: this.signPw,
+            signGender: this.signGender,
+            signMarry: this.signMarry,
+            signJob: this.signJob,
+            signLive: this.signLive,
+            signBirth: this.signBirth
+          }
+        ).then((response)=>{
+          //회원가입에  대한 response 받아서 처리하는 부분
+          if(response.data === "success"){
+            console.log("회원가입이 완료되었습니다.")
+          }else if(response.data === "fail"){
+            console.log("사용할 수 없는 아이디입니다")
+          }
+        })
+      }else{
+        console.log("패스워드가 일치하지 않습니다.")
+      }
     }
   }
 }
@@ -179,6 +189,3 @@ export default {
 <style>
 
 </style>
-
- this.axios.get(`http://localhost:8000/doctor/call/${callDoctorName}`).then((response)=>{
-      })

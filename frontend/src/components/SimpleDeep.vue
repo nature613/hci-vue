@@ -2,14 +2,18 @@
   <div>
     <Toolbar/>
     <v-container>
-      <v-layout id="simpleDeepLayout" row>
+      <v-layout id="simpleDeepLayout" column>
         <v-flex xs6>
           <v-btn class="simpleDeepBtn" href="/simple" block>simple</v-btn>
         </v-flex>
         <v-flex xs6>
           <v-btn class="simpleDeepBtn" href="/deep" block >deep</v-btn>
         </v-flex>
+        <v-flex>
+          <v-btn @click="logout">logout</v-btn>
+        </v-flex>
       </v-layout>
+      
     </v-container> 
   </div>
 </template>
@@ -24,6 +28,17 @@ export default {
   data: function(){
     return {
       
+    }
+  },
+  beforeCreate: function(){
+    if (!this.$session.exists()) {
+      this.$router.push('/') 
+    }
+  },
+  methods:{
+    logout:function(){
+      this.$session.destroy() 
+      this.$router.push('/')
     }
   }
 }

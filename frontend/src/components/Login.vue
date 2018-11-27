@@ -25,7 +25,6 @@
       <v-flex>
         <v-btn href="/sign-page">회원가입</v-btn>
       </v-flex>
-      <p>test ::::: {{test}}</p>
     </v-layout>
   </v-container>
 </div>
@@ -37,37 +36,32 @@ export default {
     return{
       inputPw : '',
       inputId : '',
-      test : '',
-      msg : ''
     }
   },
   methods:{
     loginProcess: function(){
-      this.$http.post('/test/login',
+      this.$http.post('http://localhost:3000/users/login',
       {
         loginId:this.inputId,
         loginPw:this.inputPw
       }).then((response)=>{
         if(response.status === 200  && 'token' in response.data){
-          console.log(response)
-          console.log(response.data)
-          console.log(response.body)
-          console.log(response.status)
+          // 각종 데이터 콘솔창 띄워보기
+          // console.log(response)
+          // console.log(response.data)
+          // console.log(response.body)
+          // console.log(response.status)
           this.$session.start()
-          this.$session.set('jwt', response.data.token)
-          this.$router.push('/simple-deep') 
-          this.test = 'success'
+          this.$session.set('jwt', response.data.token)           //세션에 jwt 란 key로 token 저장
+          this.$session.set('userData', response.data.userData)   //세션에 userData 로 user정보가 담긴 객체 저장
+          this.$router.push('/simple-deep')
         }else{
-          this.test = 'fail'
+
         }
       },function(err){
         console.log('err',err)
         })
       }
-
-
-
-
     // vuex를 사용한 로그인 
     // loginProcess : function(loginId,loginPw){
     //   this.$store.dispatch('LOGIN',{loginId, loginPw})

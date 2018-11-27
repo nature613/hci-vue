@@ -15,12 +15,18 @@ router.post('/login', function(req, res, next) {
     const people = db.collection('people')
     var loginId = req.body.loginId
     var loginPw = req.body.loginPw
-    console.log(loginId)
-    console.log(loginPw)
+    console.log("사용자가 로그인시에 입력한 아이디 : " + loginId)
+    console.log("사용자가 로그인시에 입력한 비밀번호 : " + loginPw)
     var user = await people.findOne({userId:loginId, userPw:loginPw})
-    console.log(user)
-    const token = "abc"
-    res.send({userData:user, token})
+    if(user){
+      console.log("로그인 성공!")
+      console.log("*********** 일치하는 유저 ***********")
+      console.log(user)
+      const token = "abc"
+      res.send({userData:user, token})
+    }else{
+      console.log("로그인 실패! 비밀번호와 아이디를 확인해주세요")
+    }    
   })
 });
 
