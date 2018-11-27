@@ -40,7 +40,7 @@
           </v-list-tile-action>
 
           <v-list-tile-content>
-            <v-list-tile-title><a href="http://localhost:8080">{{ item.title }}</a></v-list-tile-title>
+            <v-list-tile-title><a href="http://localhost:3000/me">{{ item.title }}</a></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>

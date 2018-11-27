@@ -42,49 +42,41 @@ export default {
     }
   },
   methods:{
-    // loginProcess: function(){
-    //   this.$http.post('/user/login',
-    //   {
-    //     loginId:this.inputId,
-    //     loginPw:this.inputPw
-    //   }).then((response)=>{
-    //     if(response.status === 200 && 'userName' in response.body){
-    //       console.log(response.body)
-    //       this.test = 'success'
-    //     }else{
-    //       this.test = 'fail'
-    //     }
-    //   })
+    loginProcess: function(){
+      this.$http.post('/test/login',
+      {
+        loginId:this.inputId,
+        loginPw:this.inputPw
+      }).then((response)=>{
+        if(response.status === 200  && 'token' in response.data){
+          console.log(response)
+          console.log(response.data)
+          console.log(response.body)
+          console.log(response.status)
+          this.$session.start()
+          this.$session.set('jwt', response.data.token)
+          this.$router.push('/simple-deep') 
+          this.test = 'success'
+        }else{
+          this.test = 'fail'
+        }
+      },function(err){
+        console.log('err',err)
+        })
+      }
+
+
+
+
+    // vuex를 사용한 로그인 
+    // loginProcess : function(loginId,loginPw){
+    //   this.$store.dispatch('LOGIN',{loginId, loginPw})
+    //     .then(()=>this.$router.push('/simple-deep'))
+    //     .catch(({message}) => this.msg = message)
     // }
-    loginProcess : function(loginId,loginPw){
-      this.$store.dispatch('LOGIN',{loginId, loginPw})
-        .then(()=>this.$router.push('/simple-deep'))
-        .catch(({message}) => this.msg = message)
-    }
   },
-  methods:{
-    // loginProcess: function(){
-    //   this.$http.post('/user/login',
-    //   {
-    //     loginId:this.inputId,
-    //     loginPw:this.inputPw
-    //   }).then((response)=>{
-    //     if(response.status === 200 && 'userName' in response.body){
-    //       console.log(response.body)
-    //       this.test = 'success'
-    //     }else{
-    //       this.test = 'fail'
-    //     }
-    //   })
-    // }
-  }
 }
 </script>
 <style>
 
 </style>
-
-
-this.axios.get('http://localhost:8000/doctor/list').then((response)=>{
-        this.doctorList = response.data
-      })

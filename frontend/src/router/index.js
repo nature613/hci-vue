@@ -11,14 +11,15 @@ import SimpleWrite from '@/components/SimpleWrite'
 import DeepWrite from '@/components/DeepWrite'
 import Toolbar from '@/components/Toolbar'
 
+import Me from '@/components/Me'
+import store from '../store'
+
 
 Vue.use(Router)
 
-const requireAuth = () => (from, to, next) => {
-  const isAuthenticated = false
-  if (isAuthenticated) return next()
-  next('/login?returnPath=me')
-  // next('/')
+const requireAuth = () => (to, from, next) => {
+  if (store.getters.isAuthenticated) return next()
+  next('/?returnPath=me')
 }
 
 export default new Router({
@@ -74,6 +75,12 @@ export default new Router({
       path: '/toolbar',
       name: 'Toolbar',
       component: Toolbar
+    },
+    {
+      path: '/me',
+      name: 'Me',
+      component: Me,
+      beforeEnter: requireAuth()
     }
   ]
 })
