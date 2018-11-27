@@ -175,6 +175,7 @@ export default {
           //회원가입에  대한 response 받아서 처리하는 부분
           if(response.data === "success"){
             console.log("회원가입이 완료되었습니다.")
+            this.$router.push('/')
           }else if(response.data === "fail"){
             console.log("사용할 수 없는 아이디입니다")
           }
