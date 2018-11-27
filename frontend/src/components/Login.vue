@@ -40,7 +40,7 @@ export default {
   },
   methods:{
     loginProcess: function(){
-      this.$http.post('http://localhost:3000/users/login',
+      this.$http.post('/users/login',
       {
         loginId:this.inputId,
         loginPw:this.inputPw
