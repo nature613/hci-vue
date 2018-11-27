@@ -61,6 +61,22 @@ export default {
         .then(()=>this.$router.push('/simple-deep'))
         .catch(({message}) => this.msg = message)
     }
+  },
+  methods:{
+    // loginProcess: function(){
+    //   this.$http.post('/user/login',
+    //   {
+    //     loginId:this.inputId,
+    //     loginPw:this.inputPw
+    //   }).then((response)=>{
+    //     if(response.status === 200 && 'userName' in response.body){
+    //       console.log(response.body)
+    //       this.test = 'success'
+    //     }else{
+    //       this.test = 'fail'
+    //     }
+    //   })
+    // }
   }
 }
 </script>
