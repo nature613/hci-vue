@@ -10,6 +10,7 @@ import Deep from '@/components/Deep'
 import SimpleWrite from '@/components/SimpleWrite'
 import DeepWrite from '@/components/DeepWrite'
 import Toolbar from '@/components/Toolbar'
+import ToolbarSign from '@/components/ToolbarSign'
 
 import Me from '@/components/Me'
 import store from '../store'
@@ -75,6 +76,11 @@ export default new Router({
       path: '/toolbar',
       name: 'Toolbar',
       component: Toolbar
+    },
+    {
+      path: '/toolbar-sign',
+      name: 'ToolbarSign',
+      component: ToolbarSign
     },
     {
       path: '/me',

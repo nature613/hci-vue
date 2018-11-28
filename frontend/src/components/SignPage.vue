@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Toolbar/>
+    <ToolbarSign></ToolbarSign>
     <v-form>
       <v-container>
         <v-layout column>
@@ -133,12 +133,12 @@
   </div>
 </template>
 <script>
-import Toolbar from './Toolbar.vue'
+import ToolbarSign from './ToolbarSign.vue'
 
 export default {
   name: 'SimpleDeep',
   components:{
-    Toolbar
+    ToolbarSign
   },
   data: function(){
     return {
