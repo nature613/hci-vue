@@ -3,30 +3,31 @@
     <Toolbar></Toolbar>
     <v-container>
       <v-layout column>
-        <v-flex>
-          <v-text-field
-            label="search"
-            outline
-          ></v-text-field>
+        <v-flex xs12>          
+          <SearchBar></SearchBar>
         </v-flex>
         <v-flex text-xs-center>
-          <h1>simple</h1>
+          <p class="pt-0 mt-0">simple</p>
         </v-flex>
         <v-flex>
           <v-textarea 
-          outline>
+          solo
+          v-model="simpleWriteContent"
+          label="ex) 오늘 점심">
           </v-textarea>
         </v-flex>
         <v-flex>
           <v-text-field
-            label="O"
-            outline
+            label="ex) 짜장"
+            v-model="simpleWriteO"
+            solo
           ></v-text-field>
         </v-flex>
         <v-flex>
           <v-text-field
-            label="X"
-            outline
+            label="ex) 짬뽕"
+            v-model="simpleWriteX"
+            solo
           ></v-text-field>
         </v-flex>
         <v-flex>
@@ -55,18 +56,46 @@
 
         </v-flex>
         <v-flex>
-          <v-btn block>등록</v-btn>
+          <v-btn block @click="simpleWriteProcess">등록</v-btn>
         </v-flex>
       </v-layout>
+
+      <p>*****test value*****</p>
+      <p>simpleWriteContent {{simpleWriteContent}}</p>
+      <p>simpleWriteO {{simpleWriteO}}</p>
+      <p>simpleWriteX {{simpleWriteX}}</p>
+      <p>*****test value*****</p>
     </v-container>
   </div>
 </template>
 <script>
 import Toolbar from './Toolbar.vue'
+import SearchBar from './Searchbar.vue'
+
 export default {
   name: 'SimpleWrite',
   components:{
-    Toolbar
+    Toolbar,
+    SearchBar
+  },
+  data:function(){
+    return{
+      simpleWriteContent : '',
+      simpleWriteO : '',
+      simpleWriteX : ''
+    }
+  },
+  methods:{
+    simpleWriteProcess:function(){
+      this.$http.post('/write/simple',
+      {
+        simpleWriteContent : this.simpleWriteContent,
+        simpleWriteO : this.simpleWriteO,
+        simpleWriteX : this.simpleWriteX
+      }).then((response)=>{
+        this.$router.push('/simple')
+      })
+    }
   }
 }
 </script>

@@ -22,7 +22,7 @@ router.post('/login', function(req, res, next) {
       console.log("로그인 성공!")
       console.log("*********** 일치하는 유저 ***********")
       console.log(user)
-      const token = "abc"
+      const token = user._id
       res.send({userData:user, token})
     }else{
       console.log("로그인 실패! 비밀번호와 아이디를 확인해주세요")

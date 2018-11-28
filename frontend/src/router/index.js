@@ -13,15 +13,17 @@ import Toolbar from '@/components/Toolbar'
 import ToolbarSign from '@/components/ToolbarSign'
 
 import Me from '@/components/Me'
+import Me1 from '@/components/Me1'
+import Me2 from '@/components/Me2'
 import store from '../store'
 
 
 Vue.use(Router)
 
-const requireAuth = () => (to, from, next) => {
-  if (store.getters.isAuthenticated) return next()
-  next('/?returnPath=me')
-}
+// const requireAuth = () => (to, from, next) => {
+//   if (store.getters.isAuthenticated) return next()
+//   next('/?returnPath=me')
+// }
 
 export default new Router({
   mode: 'history',
@@ -86,7 +88,17 @@ export default new Router({
       path: '/me',
       name: 'Me',
       component: Me,
-      beforeEnter: requireAuth()
+      // beforeEnter: requireAuth()
+    },
+    {
+      path: '/me-one',
+      name: 'Me1',
+      componenet: Me1
+    },
+    {
+      path: '/me-two',
+      name: 'Me2',
+      componenet: Me2
     }
   ]
 })

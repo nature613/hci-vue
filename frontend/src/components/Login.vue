@@ -52,7 +52,7 @@ export default {
           // console.log(response.body)
           // console.log(response.status)
           this.$session.start()
-          this.$session.set('jwt', response.data.token)           //세션에 jwt 란 key로 token 저장
+          this.$session.set('uid', response.data.token)           //세션에 jwt 란 key로 token 저장
           this.$session.set('userData', response.data.userData)   //세션에 userData 로 user정보가 담긴 객체 저장
           this.$router.push('/simple-deep')
         }else{

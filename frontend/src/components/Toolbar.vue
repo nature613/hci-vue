@@ -15,17 +15,18 @@
       absolute
       temporary
     >
-      <!-- <v-list class="pa-1">
+      <v-list class="pa-1">
         <v-list-tile avatar>
           <v-list-tile-avatar>
             <img src="https://randomuser.me/api/portraits/men/85.jpg">
           </v-list-tile-avatar>
 
           <v-list-tile-content>
-            <v-list-tile-title>{{userData.userName}}님 안녕하세요!</v-list-tile-title>
+            <v-list-tile-title>님 안녕하세요!</v-list-tile-title>
+            <!-- <v-list-tile-title>{{userData.userName}}님 안녕하세요!</v-list-tile-title> -->
           </v-list-tile-content>
         </v-list-tile>
-      </v-list> -->
+      </v-list>
 
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
@@ -40,7 +41,7 @@
           </v-list-tile-action>
 
           <v-list-tile-content>
-            <v-list-tile-title><v-btn>{{ item.title }}</v-btn></v-list-tile-title>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
@@ -61,7 +62,7 @@ export default {
         items: [
           { title: 'Simple', icon: 'dashboard', address: 'simple'},
           { title: 'Deep', icon: 'question_answer' ,address:'deep'},
-          { title: '내가 쓴 글/댓글'},
+          { title: '내가 쓴 글/댓글' ,icon:'room'},
           { title: '내 정보 관리'},
           { title: '설정'},
           { title: '로그아웃' , address: 'logout'}
