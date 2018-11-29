@@ -55,6 +55,15 @@
                     Item {{ n }}
                     
                   </v-tab>
+                  <v-tab-item
+                    v-for="n in 3"
+                    :key="n"
+                  >
+                  ddd
+                    <v-card flat>
+                      <v-card-text>hi</v-card-text>
+                    </v-card>
+                  </v-tab-item>
                 </v-tabs>
                   <p>-------O/X-------</p>
                   <p>O : {{item.oVote}} {{item.oVote/(item.oVote+item.xVote)*100}}%</p>
@@ -122,7 +131,8 @@ export default {
   },
   data:function(){
     return{
-      simpleList : null
+      simpleList : null,
+      text: 'textmessage'
     }
   },
   methods:{
@@ -146,6 +156,10 @@ export default {
         console.log(response.data)
         this.getSimpleList()
       })
+    },
+    genderAvg:function(){
+      var genderSum 
+
     }
   },
   mounted:function(){

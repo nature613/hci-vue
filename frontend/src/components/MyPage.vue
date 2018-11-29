@@ -1,13 +1,15 @@
 <template>
   <div>
-    <p>1</p>
+    <Toolbar></Toolbar>
+    <p>Mypage</p>
   </div>
 </template>
 <script>
+import Toolbar from './Toolbar.vue'
 export default {
-  name: 'Me1',
+  name: 'MyPage',
   components:{
-
+    Toolbar
   }
 }
 </script>

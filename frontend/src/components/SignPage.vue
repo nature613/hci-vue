@@ -103,19 +103,6 @@
           <v-flex>
             <v-btn block v-on:click="signProcess">완료</v-btn>
           </v-flex>
-          <!-- <v-flex>
-            <v-dialog v-model="dialog" persistent max-width="290">
-              <v-btn slot="activator" block @click="signProcess">완료</v-btn>
-              <v-card>
-                <v-card-title class="headline">가입이 완료되었습니다.</v-card-title>
-                <v-card-text>로그인 해주세요.</v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn href="/" color="green darken-1" flat @click="dialog = false">승인</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-flex> -->
         </v-layout>
       </v-container>
     </v-form>
@@ -175,13 +162,16 @@ export default {
           //회원가입에  대한 response 받아서 처리하는 부분
           if(response.data === "success"){
             console.log("회원가입이 완료되었습니다.")
+            alert("회원가입이 완료되었습니다.")
             this.$router.push('/')
           }else if(response.data === "fail"){
+            alert("사용할 수 없는 아이디입니다.")
             console.log("사용할 수 없는 아이디입니다")
           }
         })
       }else{
-        console.log("패스워드가 일치하지 않습니다.")
+        alert("비밀번호가 일치하지 않습니다.")
+        console.log("비밀번호가 일치하지 않습니다.")
       }
     }
   }

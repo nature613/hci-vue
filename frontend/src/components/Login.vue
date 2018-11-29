@@ -45,18 +45,20 @@ export default {
         loginId:this.inputId,
         loginPw:this.inputPw
       }).then((response)=>{
-        if(response.status === 200  && 'token' in response.data){
-          // 각종 데이터 콘솔창 띄워보기
-          // console.log(response)
-          // console.log(response.data)
-          // console.log(response.body)
-          // console.log(response.status)
-          this.$session.start()
-          this.$session.set('uid', response.data.token)           //세션에 jwt 란 key로 token 저장
-          this.$session.set('userData', response.data.userData)   //세션에 userData 로 user정보가 담긴 객체 저장
-          this.$router.push('/simple-deep')
+        if(response.data.token){
+          if(response.status === 200){
+            // 각종 데이터 콘솔창 띄워보기
+            console.log(response)
+            console.log(response.data)
+            console.log(response.body)
+            console.log(response.status)
+            this.$session.start()
+            this.$session.set('uid', response.data.token)           //세션에 jwt 란 key로 token 저장
+            this.$session.set('userData', response.data.userData)   //세션에 userData 로 user정보가 담긴 객체 저장
+            this.$router.push('/simple-deep')
+          }
         }else{
-
+          alert("잘못된 아이디/패스워드 입니다.")
         }
       },function(err){
         console.log('err',err)

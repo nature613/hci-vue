@@ -12,9 +12,12 @@ import DeepWrite from '@/components/DeepWrite'
 import Toolbar from '@/components/Toolbar'
 import ToolbarSign from '@/components/ToolbarSign'
 
-import Me from '@/components/Me'
-import Me1 from '@/components/Me1'
-import Me2 from '@/components/Me2'
+import MeContent from '@/components/MeContent'
+import MeComment from '@/components/MeComment'
+import MeVote from '@/components/MeVote'
+
+
+import MyPage from '@/components/MyPage'
 import store from '../store'
 
 
@@ -85,20 +88,25 @@ export default new Router({
       component: ToolbarSign
     },
     {
-      path: '/me',
-      name: 'Me',
-      component: Me,
+      path: '/me-content',
+      name: 'MeContent',
+      component: MeContent,
       // beforeEnter: requireAuth()
     },
     {
-      path: '/me-one',
-      name: 'Me1',
-      componenet: Me1
+      path: '/me-comment',
+      name: 'MeComment',
+      component: MeComment
     },
     {
-      path: '/me-two',
-      name: 'Me2',
-      componenet: Me2
+      path: '/me-vote',
+      name: 'MeVote',
+      component: MeVote
+    },
+    {
+      path: '/my',
+      name: 'MyPage',
+      component: MyPage
     }
   ]
 })
