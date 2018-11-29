@@ -23,7 +23,7 @@
 </template>
 <script>
 import Toolbar from './Toolbar.vue'
-import SearchBar from './Searchbar.vue'
+import SearchBar from './SearchBar.vue'
 
 export default {
   name: 'MeComment',
