@@ -75,11 +75,22 @@
               </v-expansion-panel-content>
             </v-expansion-panel>
 
+        </v-flex>
 
-        </v-flex>
-        <v-flex>
-          <v-btn block @click="simpleWriteProcess">등록</v-btn>
-        </v-flex>
+
+        <v-dialog v-model="dialogSimpleWrite" persistent>
+          <v-btn slot="activator" block >등록</v-btn>
+          <v-card>
+            <v-card-title class="headline">글 등록</v-card-title>
+            <v-card-text>글을 등록하시겠습니까?</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" flat @click="dialogSimpleWrite = false">아니오</v-btn>
+              <v-btn color="green darken-1" flat @click="simpleWriteProcess">네</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
       </v-layout>
 
       <p>*****test value*****</p>
@@ -112,6 +123,7 @@ export default {
       simplePlusContent : '',
       simplePlusO : 'O',
       simplePlusX : 'X',
+      dialogSimpleWrite :  false
     }
   },
   methods:{

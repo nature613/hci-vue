@@ -70,18 +70,6 @@
               required
             ></v-text-field>
           </v-flex>
-          <p>결혼하셨나요?</p>
-          <v-layout row>
-            <v-radio-group 
-              v-model="signMarry" 
-              :mandatory="false" 
-              :rules="[() => !!signMarry || 'This field is required']"
-              required
-              row>
-              <v-radio label="미혼" value="미혼"></v-radio>
-              <v-radio label="기혼" value="기혼"></v-radio>
-            </v-radio-group>
-          </v-layout>
           <v-flex>
             <label for="signJob">직업은요?</label>
             <v-select 
@@ -113,7 +101,6 @@
     <p>signPwRe: {{signPwRe}}</p>
     <p>signJob: {{signJob}}</p>
     <p>signLive: {{signLive}}</p>
-    <p>signMarry: {{signMarry}}</p>
     <p>signGender: {{signGender}}</p>
     <p>signBirth: {{signBirth}}</p>
     <p>*****test value*****</p>
@@ -138,7 +125,6 @@ export default {
       signPw: '',
       signPwRe: '',
       signGender: '',
-      signMarry: '',
       signJob: '',
       signLive: '',
       signBirth: ''
@@ -153,7 +139,6 @@ export default {
             signId: this.signId,
             signPw: this.signPw,
             signGender: this.signGender,
-            signMarry: this.signMarry,
             signJob: this.signJob,
             signLive: this.signLive,
             signBirth: this.signBirth

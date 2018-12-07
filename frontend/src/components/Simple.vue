@@ -178,18 +178,6 @@
                       </v-card-text>
                     </v-card>
                   </v-tab-item>
-                  <!-- <v-tab-item>
-                    <v-card flat>
-                      <v-card-text>
-                        <p>-------결혼-------</p>
-                        <p>미혼 O: {{item.marryNoO}}</p>
-                        <p>미혼 X: {{item.marryNoX}}</p>
-                        <p>기혼 O: {{item.marryYesO}}</p>
-                        <p>기혼 X: {{item.marryYesX}}</p>                        
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item> -->
-
                   <v-tab-item>
                     <v-card flat>
                       <v-card-text>

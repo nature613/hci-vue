@@ -56,7 +56,6 @@ router.post('/sign-process',function(req,res){
           userJob : signData.signJob,
           userLive : signData.signLive,
           userGender: signData.signGender,
-          userMarry : signData.signMarry
         })
       console.log("회원가입 성공 : " + result)
       res.send("success")
