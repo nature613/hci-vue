@@ -10,7 +10,7 @@
           ></v-text-field>
         </v-flex>
         <v-flex text-xs-center>
-          <h1>deep</h1>
+          <h1>deep 글쓰기</h1>
         </v-flex>
       </v-layout>
     </v-container>

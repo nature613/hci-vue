@@ -7,7 +7,7 @@
           <SearchBar></SearchBar>
         </v-flex>
         <v-flex text-xs-center>
-          <p class="pt-0 mt-0">simple</p>
+          <p class="pt-0 mt-0">simple 글쓰기</p>
         </v-flex>
         <v-flex>
           <v-textarea 
@@ -48,7 +48,29 @@
                   </v-layout>
                 </div>
                 <v-card>
-                  <v-card-text class="grey lighten-3">mm</v-card-text>
+                  <v-card-text class="grey lighten-3">
+                    <v-layout column>
+                      <v-flex>
+                        <v-text-field
+                          label="추가 정보 ex) 흡연 여부 , 해외경험유무"
+                          v-model="simplePlusContent"
+                        ></v-text-field>
+                      </v-flex>
+                      <v-flex>
+                        <v-text-field
+                          label="ex)흡연 , O"
+                          v-model="simplePlusO"
+                        ></v-text-field>
+                      </v-flex>
+                      <v-flex>
+                        <v-text-field
+                          label="ex)비흡연 , X"
+                          v-model="simplePlusX"
+                        ></v-text-field>
+                      </v-flex>
+                    </v-layout>
+                      
+                  </v-card-text>
                 </v-card>
               </v-expansion-panel-content>
             </v-expansion-panel>
@@ -64,6 +86,10 @@
       <p>simpleWriteContent {{simpleWriteContent}}</p>
       <p>simpleWriteO {{simpleWriteO}}</p>
       <p>simpleWriteX {{simpleWriteX}}</p>
+      <p>simplePlusContent {{simplePlusContent}}</p>
+      <p>simplePlusO {{simplePlusO}}</p>
+      <p>simplePlusX {{simplePlusX}}</p>
+
       <p>*****test value*****</p>
     </v-container>
   </div>
@@ -82,20 +108,28 @@ export default {
     return{
       simpleWriteContent : '',
       simpleWriteO : '',
-      simpleWriteX : ''
+      simpleWriteX : '',
+      simplePlusContent : '',
+      simplePlusO : 'O',
+      simplePlusX : 'X',
     }
   },
   methods:{
     simpleWriteProcess:function(){
-      this.$http.post('/write/simple',
+      this.$http.post('/simple/write',
       {
         simpleWriteContent : this.simpleWriteContent,
         simpleWriteO : this.simpleWriteO,
-        simpleWriteX : this.simpleWriteX
+        simpleWriteX : this.simpleWriteX,
+        simplePlusContent : this.simplePlusContent,
+        simplePlusO : this.simplePlusO,
+        simplePlusX : this.simplePlusX
       }).then((response)=>{
         this.$router.push('/simple')
       })
     }
+  },
+  mounted:function(){
   }
 }
 </script>

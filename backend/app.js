@@ -11,7 +11,7 @@ const MongoClient = mongodb.MongoClient
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var writeRouter = require('./routes/write');
-var readRouter = require('./routes/read');
+var simpleRouter = require('./routes/simple');
 var testRouter = require('./routes/test')
 
 var app = express();
@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/write',writeRouter);
-app.use('/read',readRouter)
+app.use('/simple',simpleRouter)
 app.use('/test',testRouter);
 
 

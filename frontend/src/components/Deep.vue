@@ -3,11 +3,8 @@
     <Toolbar></Toolbar>
     <v-container>
       <v-layout column>
-        <v-flex>
-          <v-text-field
-            label="search"
-            outline
-          ></v-text-field>
+        <v-flex xs12>
+          <SearchBar></SearchBar>
         </v-flex>
         <v-flex mb-3>
           <v-btn href="/deep-write" block>
@@ -48,12 +45,16 @@
 </template>
 <script>
 import Toolbar from './Toolbar.vue'
+import SearchBar from './SearchBar.vue'
+
 export default {
   name: 'Deep',
   components:{
-    Toolbar
+    Toolbar,
+    SearchBar
   }
 }
+
 </script>
 <style>
 
