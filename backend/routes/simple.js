@@ -72,24 +72,19 @@ router.post('/write',(req,res)=>{
         jobSelfO:0,
         jobArtO:0,
         jobEtcO:0,
-        marryYesO:0,
-        marryNoO:0,
         liveSsO:0,
         liveGgO:0,
         liveGwO:0,
-        liveCnO:0,
-        liveCbO:0,
-        liveJbO:0,
-        liveJnO:0,
-        liveGbO:0,
-        liveGnO:0,
+        liveCcO:0,
+        liveJlO:0,
+        liveGsO:0,
         liveJjO:0,
+        ageZeroO:0,
         ageOneO:0,
         ageTwoO:0,
         ageThreeO:0,
         ageFourO:0,
-        ageFiveO:0,
-        ageUpSixO:0,
+        ageUpFiveO:0,
 
 
         genderMaleX:0,
@@ -103,24 +98,20 @@ router.post('/write',(req,res)=>{
         jobSelfX:0,
         jobArtX:0,
         jobEtcX:0,
-        marryYesX:0,
-        marryNoX:0,
         liveSsX:0,
         liveGgX:0,
         liveGwX:0,
-        liveCnX:0,
-        liveCbX:0,
-        liveJbX:0,
-        liveJnX:0,
-        liveGbX:0,
-        liveGnX:0,
+        liveCcX:0,
+        liveJlX:0,
+        liveGsX:0,
         liveJjX:0,
+        ageZeroX:0,
         ageOneX:0,
         ageTwoX:0,
         ageThreeX:0,
         ageFourX:0,
-        ageFiveX:0,
-        ageUpSixX:0,
+        ageUpFiveX:0,
+
         voter : [],
         xvoter : [],
         ovoter : [],
@@ -145,11 +136,14 @@ router.post('/vote-o/:contentId', function(req, res, next) {
     var contentId = req.params.contentId
     var voterId  = req.body.voter
     var voterGender = req.body.voterGender + "O"
+    var voterBirth = req.body.voterBirth + "O"
     var voterJob = req.body.voterJob + "O"
     var voterLive = req.body.voterLive + "O"
-    var voterMarry = req.body.voterMarry + "O"
     console.log("찾으려는 글의 _id 값 : " + contentId)      
     var oContentId = new ObjectId(contentId);
+    var test1 = await simple.findOne( {plusOSetter : {$in:[voterId]}} )
+    console.log("Test1 : ----------------------------------------")
+    console.log(test1)
     //투표 한 경우
     if((await simple.findOne({$and: 
       [
@@ -163,18 +157,18 @@ router.post('/vote-o/:contentId', function(req, res, next) {
       console.log("OkOKOK")
 
       //투표 안했는데 추가정보 O에 입력한 경우
-      if(await simple.findOne( {plusOSetter : {$in:[voterId]}} )){
-        await simple.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterJob] : 1 , [voterLive] : 1 , plusOvoteO : 1  } })
+      if(await simple.findOne( {$and:[{_id:oContentId},{plusOSetter : {$in:[voterId]}} ]})){
+        await simple.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusOvoteO : 1  } })
         await simple.update({_id:oContentId},{$push: { voter : voterId , ovoter : voterId}})
 
       //투표 안했는데 추가정보 X에 입력한 경우
-      }else if(await simple.findOne( {plusXSetter : {$in:[voterId]}} )){
-        await simple.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterJob] : 1 , [voterLive] : 1 , plusXvoteO : 1  } })
+      }else if(await simple.findOne( {$and:[{_id:oContentId},{plusXSetter : {$in:[voterId]}} ]})){
+        await simple.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusXvoteO : 1  } })
         await simple.update({_id:oContentId},{$push: { voter : voterId , ovoter : voterId}})
 
       //투표 안했고 , 추가 정보 입력안한 경우
       }else{
-        await simple.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterJob] : 1 , [voterLive] : 1  } })
+        await simple.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1  } })
         await simple.update({_id:oContentId},{$push: { voter : voterId , ovoter : voterId}})
         
       }
@@ -196,9 +190,9 @@ router.post('/vote-x/:contentId', function(req, res, next) {
     var contentId = req.params.contentId
     var voterId  = req.body.voter 
     var voterGender = req.body.voterGender + "X"
+    var voterBirth = req.body.voterBirth + "X"
     var voterJob = req.body.voterJob + "X"
     var voterLive = req.body.voterLive + "X"
-    var voterMarry = req.body.voterMarry + "X"
     console.log("찾으려는 글의 _id 값 : " + contentId)
     var xContentId = new ObjectId(contentId);
 
@@ -213,18 +207,18 @@ router.post('/vote-x/:contentId', function(req, res, next) {
     }else{
       console.log("OkOKOK")
       //투표 안했는데 추가정보 O에 입력한 경우
-      if(await simple.findOne( {plusOSetter : {$in:[voterId]}} )){
-        await simple.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterJob] : 1 , [voterLive] : 1 , plusOvoteX : 1  } })
+      if(await simple.findOne( {$and:[{_id:xContentId},{plusOSetter : {$in:[voterId]}} ]} )){
+        await simple.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusOvoteX : 1  } })
         await simple.update({_id:xContentId},{$push: { voter : voterId , xvoter : voterId}})
 
       //투표 안했는데 추가정보 X에 입력한 경우
-      }else if(await simple.findOne( {plusXSetter : {$in:[voterId]}} )){
-        await simple.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterJob] : 1 , [voterLive] : 1 , plusXvoteX : 1  } })
+      }else if(await simple.findOne({$and:[{_id:xContentId},{plusXSetter : {$in:[voterId]}} ]})){
+        await simple.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusXvoteX : 1  } })
         await simple.update({_id:xContentId},{$push: { voter : voterId , xvoter : voterId}})
 
       //투표 안했고 , 추가 정보 입력안한 경우
       }else{
-        await simple.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterJob] : 1 , [voterLive] : 1  } })
+        await simple.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1  } })
         await simple.update({_id:xContentId},{$push: { voter : voterId , xvoter : voterId}})
         
       }
@@ -335,7 +329,7 @@ router.post('/set-plus-x/:contentId', function(req, res, next) {
       })){
         console.log("test - 4")
         //x를 투표한 사람인 경우
-        await simple.update({_id:xContentId},{ $inc: { plusvoteX : 1} })
+        await simple.update({_id:xContentId},{ $inc: { plusXvoteX : 1} })
       }else{
         console.log("test - 5")
         console.log("투표를 아직 안함")

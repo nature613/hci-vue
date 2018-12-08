@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "chart.js": "^2.7.3",
     "material-design-icons": "^3.0.1",
     "vue": "^2.5.2",
+    "vue-chartjs": "^3.4.0",
     "vue-router": "^3.0.1",
     "vue-session": "^1.0.0",
     "vuetify": "^1.0.0",

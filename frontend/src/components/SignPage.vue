@@ -60,13 +60,13 @@
           </v-layout>
           <v-flex>
             <v-text-field
-              label="생년월일을 8자리로 입력해주세요"
+              label="태어난 해를 입력해주세요 ex) 1990"
               type="number"
-              :counter="8"
               id="signBirth"
               name="signBirth"
               v-model="signBirth"
-              :rules="[() => !!signBirth || 'This field is required']"
+              maxlength="4"
+              :rules="[rules.required, rules.counter, () => !!signBirth || 'This field is required']"
               required
             ></v-text-field>
           </v-flex>
@@ -118,7 +118,7 @@ export default {
     return {
       selected:'',
       jobs :['무직','중학생','고등학생','대학생','주부','회사원','자영업자','예체능계열','기타'],
-      lives : ['서울특별시','경기도','강원도','충청남도','충청북도','전라북도','전라남도','경상북도','경상남도','제주도'],
+      lives : ['서울특별시','경기도(인천 포함)','강원도','충청도(대전,세종 포함)','경상도(대구,울산,부산 포함)','전라도(광주 포함)','제주도'],
       dialog: false,
       signName: '',
       signId: '',
@@ -127,7 +127,11 @@ export default {
       signGender: '',
       signJob: '',
       signLive: '',
-      signBirth: ''
+      signBirth: '',
+      rules: {
+          required: value => !!value || 'Required.',
+          counter: value => value.length <= 4 || '4자리 숫자로 입력해주세요',
+      }
     }
   },
   methods:{
@@ -141,7 +145,7 @@ export default {
             signGender: this.signGender,
             signJob: this.signJob,
             signLive: this.signLive,
-            signBirth: this.signBirth
+            signBirth: Number(this.signBirth)
           }
         ).then((response)=>{
           //회원가입에  대한 response 받아서 처리하는 부분

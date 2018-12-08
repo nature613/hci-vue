@@ -10,8 +10,6 @@ import VueSession from 'vue-session'
 // import store from './store.js'
 import store from './store/index.js'
 
-
-
 Vue.use(VueSession)
 Vue.prototype.$http = axios
 
