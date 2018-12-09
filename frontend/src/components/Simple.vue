@@ -17,7 +17,7 @@
           expand
         >
           <v-expansion-panel-content
-            v-for="(item, i) in simpleList.slice().reverse()"
+            v-for="(item, i) in simpleList"
             :key="i"
             expand-icon=""
           >
@@ -284,6 +284,7 @@ export default {
         console.log(response)
         console.log(response.data)
         this.simpleList = response.data
+        this.simpleList.slice().reverse()
         this.loaded = true
       })
     },
@@ -429,9 +430,11 @@ export default {
     this.userId = userData.userId
     this.getSimpleList()
   },
-  computed:{
-
-  }
+  // computed:{
+  //   returnSimpleList : function(){
+  //     return this.simpleList.slice().reverse()
+  //   }
+  // }
 }
 </script>
 <style scoped>
