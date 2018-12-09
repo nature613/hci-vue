@@ -11,7 +11,8 @@
             글쓰기 
           </v-btn>
         </v-flex>
-
+	
+	 <div v-if="simpleList != null">
          <v-expansion-panel
           v-model="panel"
           expand
@@ -20,7 +21,6 @@
             v-for="(item, i) in simpleList"
             :key="i"
             expand-icon=""
-            v-if="item"
           >
             <div slot="header">
               <v-layout column>
@@ -221,8 +221,9 @@
             </v-card>
           </v-expansion-panel-content>
         </v-expansion-panel>
-
+	</div>
         <GenderChart></GenderChart>
+
       </v-layout>
     </v-container>
     <v-btn @click="getSimpleList">test button</v-btn>
