@@ -11,16 +11,14 @@
             글쓰기 
           </v-btn>
         </v-flex>
-
          <v-expansion-panel
           v-model="panel"
           expand
         >
           <v-expansion-panel-content
-            v-for="(item, i) in simpleList"
+            v-for="(item, i) in simpleList.slice().reverse()"
             :key="i"
             expand-icon=""
-            v-if="item"
           >
             <div slot="header">
               <v-layout column>
@@ -284,7 +282,6 @@ export default {
         console.log(response)
         console.log(response.data)
         this.simpleList = response.data
-        this.simpleList.slice().reverse()
         this.loaded = true
       })
     },
