@@ -11,31 +11,32 @@
         </v-flex>
         <v-flex>
           <v-card>
-            <v-card-title>
-              <v-text-field
-                label="제목"
-              ></v-text-field>
-            </v-card-title>
             <v-cart-text>
               <v-container>
               <v-layout column>
                 <v-flex>
+                  <v-text-field
+                    label="제목"
+                    v-model="deepWriteTitle"
+                  ></v-text-field>
+                </v-flex>
+                <v-flex>
                   <v-textarea
                     box
                     label="세부내용"
-                    v-model="a"
+                    v-model="deepWriteContent"
                   ></v-textarea>
                 </v-flex>
                 <v-flex>
                   <v-text-field
                     label="O"
-                    v-model="a"
+                    v-model="deepWriteO"
                   ></v-text-field>
                 </v-flex>
                 <v-flex>
                   <v-text-field
                     label="X"
-                    v-model="a"
+                    v-model="deepWriteX"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -65,19 +66,19 @@
                       <v-flex>
                         <v-text-field
                           label="추가 정보 ex) 흡연 여부 , 해외경험유무"
-                          v-model="simplePlusContent"
+                          v-model="deepPlusContent"
                         ></v-text-field>
                       </v-flex>
                       <v-flex>
                         <v-text-field
                           label="ex)흡연 , O"
-                          v-model="simplePlusO"
+                          v-model="deepPlusO"
                         ></v-text-field>
                       </v-flex>
                       <v-flex>
                         <v-text-field
                           label="ex)비흡연 , X"
-                          v-model="simplePlusX"
+                          v-model="deepPlusX"
                         ></v-text-field>
                       </v-flex>
                     </v-layout>
@@ -88,7 +89,15 @@
             </v-expansion-panel>
         </v-flex>
         <v-flex>
-          <v-btn block>등록</v-btn>
+          <v-btn block @click="deepWriteProcess">등록</v-btn>
+          <p>**********test value**********</p>
+          <p>deepWriteTitle {{deepWriteTitle}}</p>
+          <p>deepWriteContent {{deepWriteContent}}</p>
+          <p>deepWriteO {{deepWriteO}}</p>
+          <p>deepWriteX {{deepWriteX}}</p>
+          <p>deepPlusContent {{deepPlusContent}}</p>
+          <p>deepPlusO {{deepPlusO}}</p>
+          <p>deepPlusX {{deepPlusX}}</p>
         </v-flex>
       </v-layout>
     </v-container>
@@ -102,6 +111,33 @@ export default {
   components:{
     Toolbar,
     SearchBar
+  },
+  data:function(){
+    return{
+      deepWriteTitle : '',
+      deepWriteContent : '',
+      deepWriteO : '',
+      deepWriteX : '',
+      deepPlusContent : '',
+      deepPlusO : '',
+      deepPlusX : '',
+    }
+  },
+  methods:{
+    deepWriteProcess:function(){
+      this.$http.post('/deep/write',
+      {
+        deepWriteTitle : this.deepWriteTitle,
+        deepWriteContent : this.deepWriteContent,
+        deepWriteO : this.deepWriteO,
+        deepWriteX : this.deepWriteX,
+        deepPlusContent : this.deepPlusContent,
+        deepPlusO : this.deepPlusO,
+        deepPlusX : this.deepPlusX
+      }).then((response)=>{
+        this.$router.push('/deep')
+      })
+    }
   }
 }
 </script>

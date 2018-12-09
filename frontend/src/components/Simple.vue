@@ -11,6 +11,7 @@
             글쓰기 
           </v-btn>
         </v-flex>
+        
          <v-expansion-panel
           v-model="panel"
           expand
@@ -239,7 +240,6 @@ import JobRadarChart from './chart/JobRadarChart.vue'
 import LiveRadarChart from  './chart/LiveRadarChart.vue'
 import PlusOPieChart from './chart/PlusOPieChart.vue'
 import PlusXPieChart from './chart/PlusXPieChart.vue'
-import TestRadarChart from './chart/TestRadarChart.vue'
 
 
 export default {
@@ -255,7 +255,6 @@ export default {
     LiveRadarChart,
     PlusOPieChart,
     PlusXPieChart,
-    TestRadarChart
   },
   data:function(){
     return{
