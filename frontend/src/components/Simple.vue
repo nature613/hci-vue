@@ -20,6 +20,7 @@
             v-for="(item, i) in simpleList"
             :key="i"
             expand-icon=""
+            v-if="item"
           >
             <div slot="header">
               <v-layout column>
@@ -28,7 +29,6 @@
                   <v-spacer></v-spacer>
                   <v-btn>통계보기</v-btn>
                 </v-layout>
-                <template v-if="item">
                 <v-layout v-if="item.voter.includes(userId) === false" row>
                   <v-flex>
                     <v-btn @click="simpleVoteO(item._id)" block>{{item.O}}(O)</v-btn>
@@ -47,7 +47,6 @@
                     <v-btn disabled v-if="(item.xvoter.includes(userId) === false)" @click="simpleVoteX(item._id)" block>{{item.X}}(X)</v-btn>
                   </v-flex>
                 </v-layout>
-                </template>
               </v-layout>  
             </div>
             <v-card>
@@ -58,7 +57,6 @@
                       <p><b>-투표자 추가 정보-</b></p>
                       {{item.plusContent}}
                     </v-flex>
-                    <template v-if="item">
                     <v-layout v-if="(item.plusOSetter.includes(userId) === false) && (item.plusXSetter.includes(userId) === false)" row>
                       <v-flex>
                         <v-btn block @click="setPlusO(item._id)">{{item.plusO}}</v-btn>
@@ -77,7 +75,6 @@
                         <v-btn disabled block v-if="(item.plusXSetter.includes(userId) === false)" @click="setPlusX(item._id)">{{item.plusX}}</v-btn>
                       </v-flex>
                     </v-layout>
-                    </template>
   
                   </v-layout>
                 </p>
