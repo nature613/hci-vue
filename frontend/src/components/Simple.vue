@@ -28,7 +28,7 @@
                   <v-spacer></v-spacer>
                   <v-btn>통계보기</v-btn>
                 </v-layout>
-                <v-layout v-if="item.voter.includes(userId) === false" row>
+                <v-layout v-show="item.voter.includes(userId) === false" row>
                   <v-flex>
                     <v-btn @click="simpleVoteO(item._id)" block>{{item.O}}(O)</v-btn>
                   </v-flex>
@@ -36,14 +36,14 @@
                     <v-btn @click="simpleVoteX(item._id)" block>{{item.X}}(X)</v-btn>
                   </v-flex>
                 </v-layout>
-                <v-layout v-if="item.voter.includes(userId) === true" row>
+                <v-layout v-show="item.voter.includes(userId) === true" row>
                   <v-flex>
-                    <v-btn disabled v-if="(item.ovoter.includes(userId) === true)" @click="simpleVoteO(item._id)" block>{{item.O}}(O) 선택함</v-btn>
-                    <v-btn disabled v-if="(item.ovoter.includes(userId) === false)" @click="simpleVoteO(item._id)" block>{{item.O}}(O)</v-btn>
+                    <v-btn disabled v-show="(item.ovoter.includes(userId) === true)" @click="simpleVoteO(item._id)" block>{{item.O}}(O) 선택함</v-btn>
+                    <v-btn disabled v-show="(item.ovoter.includes(userId) === false)" @click="simpleVoteO(item._id)" block>{{item.O}}(O)</v-btn>
                   </v-flex>
                   <v-flex>
-                    <v-btn disabled v-if="(item.xvoter.includes(userId) === true)" @click="simpleVoteX(item._id)" color="primary" block>{{item.X}}(X) 선택함</v-btn>
-                    <v-btn disabled v-if="(item.xvoter.includes(userId) === false)" @click="simpleVoteX(item._id)" block>{{item.X}}(X)</v-btn>
+                    <v-btn disabled v-show="(item.xvoter.includes(userId) === true)" @click="simpleVoteX(item._id)" color="primary" block>{{item.X}}(X) 선택함</v-btn>
+                    <v-btn disabled v-show="(item.xvoter.includes(userId) === false)" @click="simpleVoteX(item._id)" block>{{item.X}}(X)</v-btn>
                   </v-flex>
                 </v-layout>
               </v-layout>  
@@ -56,7 +56,7 @@
                       <p><b>-투표자 추가 정보-</b></p>
                       {{item.plusContent}}
                     </v-flex>
-                    <v-layout v-if="(item.plusOSetter.includes(userId) === false) && (item.plusXSetter.includes(userId) === false)" row>
+                    <v-layout v-show="(item.plusOSetter.includes(userId) === false) && (item.plusXSetter.includes(userId) === false)" row>
                       <v-flex>
                         <v-btn block @click="setPlusO(item._id)">{{item.plusO}}</v-btn>
                       </v-flex>
@@ -64,14 +64,14 @@
                         <v-btn block @click="setPlusX(item._id)">{{item.plusX}}</v-btn>
                       </v-flex>
                     </v-layout>
-                    <v-layout v-if="(item.plusOSetter.includes(userId) === true) || (item.plusXSetter.includes(userId) === true)" row>
+                    <v-layout v-show="(item.plusOSetter.includes(userId) === true) || (item.plusXSetter.includes(userId) === true)" row>
                       <v-flex>
-                        <v-btn disabled block v-if="(item.plusOSetter.includes(userId) === true)" @click="setPlusO(item._id)">{{item.plusO}} 선택함</v-btn>
-                        <v-btn disabled block v-if="(item.plusOSetter.includes(userId) === false)" @click="setPlusO(item._id)">{{item.plusO}}</v-btn>
+                        <v-btn disabled block v-show="(item.plusOSetter.includes(userId) === true)" @click="setPlusO(item._id)">{{item.plusO}} 선택함</v-btn>
+                        <v-btn disabled block v-show="(item.plusOSetter.includes(userId) === false)" @click="setPlusO(item._id)">{{item.plusO}}</v-btn>
                       </v-flex>
                       <v-flex>
-                        <v-btn disabled block v-if="(item.plusXSetter.includes(userId) === true)" @click="setPlusX(item._id)">{{item.plusX}} 선택함</v-btn>
-                        <v-btn disabled block v-if="(item.plusXSetter.includes(userId) === false)" @click="setPlusX(item._id)">{{item.plusX}}</v-btn>
+                        <v-btn disabled block v-show="(item.plusXSetter.includes(userId) === true)" @click="setPlusX(item._id)">{{item.plusX}} 선택함</v-btn>
+                        <v-btn disabled block v-show="(item.plusXSetter.includes(userId) === false)" @click="setPlusX(item._id)">{{item.plusX}}</v-btn>
                       </v-flex>
                     </v-layout>
 
