@@ -94,7 +94,7 @@
         </v-layout>
       </v-container>
     </v-form>
-    <p>*****test value*****</p>
+    <!-- <p>*****test value*****</p>
     <p>signName : {{signName}}</p>
     <p>signId : {{signId}}</p>
     <p>signPw : {{signPw}}</p>
@@ -103,7 +103,7 @@
     <p>signLive: {{signLive}}</p>
     <p>signGender: {{signGender}}</p>
     <p>signBirth: {{signBirth}}</p>
-    <p>*****test value*****</p>
+    <p>*****test value*****</p> -->
   </div>
 </template>
 <script>
@@ -147,7 +147,7 @@ export default {
             signLive: this.signLive,
             signBirth: Number(this.signBirth)
           }
-        ).then((response)=>{
+        ).then((response)=>{ 
           //회원가입에  대한 response 받아서 처리하는 부분
           if(response.data === "success"){
             console.log("회원가입이 완료되었습니다.")

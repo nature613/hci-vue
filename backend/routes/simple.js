@@ -32,7 +32,9 @@ router.post('/write',(req,res)=>{
     const db = client.db("hci")
     const simple = db.collection('simple')
 
+
     var simpleWriteContent = req.body.simpleWriteContent
+    var simpleWriteAuthor = req.body.simpleWriteAuthor
     var simpleWriteO = req.body.simpleWriteO
     var simpleWriteX = req.body.simpleWriteX
     var simplePlusContent = req.body.simplePlusContent
@@ -49,6 +51,7 @@ router.post('/write',(req,res)=>{
     await simple.insertOne(
       {
         content:simpleWriteContent, 
+        author : simpleWriteAuthor,
         O:simpleWriteO, 
         X:simpleWriteX,
         plusContent : simplePlusContent,

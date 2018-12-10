@@ -88,16 +88,27 @@
               </v-expansion-panel-content>
             </v-expansion-panel>
         </v-flex>
+        <v-dialog v-model="dialogDeepWrite" persistent>
+          <v-btn slot="activator" block >등록</v-btn>
+          <v-card>
+            <v-card-title class="headline">글 등록</v-card-title>
+            <v-card-text>글을 등록하시겠습니까?</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" flat @click="dialogDeepWrite = false">아니오</v-btn>
+              <v-btn color="green darken-1" flat @click="deepWriteProcess">네</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
         <v-flex>
-          <v-btn block @click="deepWriteProcess">등록</v-btn>
-          <p>**********test value**********</p>
+          <!-- <p>**********test value**********</p>
           <p>deepWriteTitle {{deepWriteTitle}}</p>
           <p>deepWriteContent {{deepWriteContent}}</p>
           <p>deepWriteO {{deepWriteO}}</p>
           <p>deepWriteX {{deepWriteX}}</p>
           <p>deepPlusContent {{deepPlusContent}}</p>
           <p>deepPlusO {{deepPlusO}}</p>
-          <p>deepPlusX {{deepPlusX}}</p>
+          <p>deepPlusX {{deepPlusX}}</p> -->
         </v-flex>
       </v-layout>
     </v-container>
@@ -121,6 +132,7 @@ export default {
       deepPlusContent : '',
       deepPlusO : '',
       deepPlusX : '',
+      dialogDeepWrite :  false
     }
   },
   methods:{
@@ -138,6 +150,8 @@ export default {
         this.$router.push('/deep')
       })
     }
+  },
+  mounted:function(){
   }
 }
 </script>

@@ -20,7 +20,7 @@
             v-for="(item, i) in deepList.slice().reverse()"
             :key="i"
             expand-icon=""
-          >
+          > 
             <div slot="header">
               <v-layout column>
                 <v-layout row>
