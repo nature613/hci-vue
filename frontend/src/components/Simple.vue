@@ -197,10 +197,10 @@
                       <v-card-text>
                         <v-layout row>
                           <v-flex>
-                            <PlusOPieChart :plusOvoteO="item.plusOvoteO" :plusOvoteX="item.plusOvoteX"  :width="134" :height="230"></PlusOPieChart>
+                            <PlusOPieChart :plusOvoteO="item.plusOvoteO" :plusOvoteX="item.plusOvoteX" :plusOContent="item.plusContent+item.plusO" :width="134" :height="230"></PlusOPieChart>
                           </v-flex>
                           <v-flex>
-                            <PlusXPieChart :plusXvoteO="item.plusXvoteO" :plusXvoteX="item.plusXvoteX"  :width="134" :height="230"></PlusXPieChart>
+                            <PlusXPieChart :plusXvoteO="item.plusXvoteO" :plusXvoteX="item.plusXvoteX" :plusXContent="item.plusContent+item.plusX" :width="134" :height="230"></PlusXPieChart>
                           </v-flex>
                         </v-layout>
                         <!-- <p>-------투표자가 원하는 추가 정보-------</p>

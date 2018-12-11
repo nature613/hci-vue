@@ -8,17 +8,28 @@ export default {
   props:['maleO','maleX'],
   mounted () {
     this.renderChart({
-      labels: ['남자-O','남자-X'],
+      labels: ['O','X'],
       datasets: [
         {
           backgroundColor: [ 
-            '#41B883',
-            '#E46651'
+            // '#41B883',
+            // '#E46651'
+            'rgba(179,181,198,1)',
+            'rgba(255,99,132,1)'
           ],
           data: [this.maleO,this.maleX]
         }
       ]
-    }, {responsive: false, maintainAspectRatio: false})
+    },
+    {
+      responsive: false, 
+      maintainAspectRatio: false,
+      title:{
+        display : true,
+        text : "남자",
+        position : 'bottom'
+      }
+    })
   }
 }
 

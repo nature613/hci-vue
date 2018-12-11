@@ -9,7 +9,7 @@ router.post('/read', function(req, res, next) {
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
     if(!err){
-      console.log("MongoDb Connected - readSimple")
+      console.log("MongoDb Connected - readdeep")
     }
     const db = client.db("hci")
     const deep = db.collection('deep')
@@ -26,7 +26,7 @@ router.post('/write',(req,res)=>{
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
     if(!err){
-      console.log("MongoDb Connected - SimpleWrite")
+      console.log("MongoDb Connected - deepWrite")
     }
     const db = client.db("hci")
     const deep = db.collection('deep')
@@ -130,15 +130,16 @@ router.post('/write',(req,res)=>{
   })
 })
 
-//simple contentId 글에 찬성하기
+//deep contentId 글에 찬성하기
 router.post('/vote-o/:contentId', function(req, res, next) {
+  console.log("도착")
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
     if(!err){
-      console.log("MongoDb Connected - simple vote-o")
+      console.log("MongoDb Connected - deep vote-o")
     }
     const db = client.db("hci")
-    const simple = db.collection('simple')
+    const deep = db.collection('deep')
     var contentId = req.params.contentId
     var voterId  = req.body.voter
     var voterGender = req.body.voterGender + "O"
@@ -147,11 +148,11 @@ router.post('/vote-o/:contentId', function(req, res, next) {
     var voterLive = req.body.voterLive + "O"
     console.log("찾으려는 글의 _id 값 : " + contentId)      
     var oContentId = new ObjectId(contentId);
-    var test1 = await simple.findOne( {plusOSetter : {$in:[voterId]}} )
+    var test1 = await deep.findOne( {plusOSetter : {$in:[voterId]}} )
     console.log("Test1 : ----------------------------------------")
     console.log(test1)
     //투표 한 경우
-    if((await simple.findOne({$and: 
+    if((await deep.findOne({$and: 
       [
         {_id:oContentId},
         {voter : {$in:[voterId]}}, 
@@ -163,19 +164,19 @@ router.post('/vote-o/:contentId', function(req, res, next) {
       console.log("OkOKOK")
 
       //투표 안했는데 추가정보 O에 입력한 경우
-      if(await simple.findOne( {$and:[{_id:oContentId},{plusOSetter : {$in:[voterId]}} ]})){
-        await simple.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusOvoteO : 1  } })
-        await simple.update({_id:oContentId},{$push: { voter : voterId , ovoter : voterId}})
+      if(await deep.findOne( {$and:[{_id:oContentId},{plusOSetter : {$in:[voterId]}} ]})){
+        await deep.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusOvoteO : 1  } })
+        await deep.update({_id:oContentId},{$push: { voter : voterId , ovoter : voterId}})
 
       //투표 안했는데 추가정보 X에 입력한 경우
-      }else if(await simple.findOne( {$and:[{_id:oContentId},{plusXSetter : {$in:[voterId]}} ]})){
-        await simple.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusXvoteO : 1  } })
-        await simple.update({_id:oContentId},{$push: { voter : voterId , ovoter : voterId}})
+      }else if(await deep.findOne( {$and:[{_id:oContentId},{plusXSetter : {$in:[voterId]}} ]})){
+        await deep.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusXvoteO : 1  } })
+        await deep.update({_id:oContentId},{$push: { voter : voterId , ovoter : voterId}})
 
       //투표 안했고 , 추가 정보 입력안한 경우
       }else{
-        await simple.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1  } })
-        await simple.update({_id:oContentId},{$push: { voter : voterId , ovoter : voterId}})
+        await deep.update({_id:oContentId},{ $inc: { oVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1  } })
+        await deep.update({_id:oContentId},{$push: { voter : voterId , ovoter : voterId}})
         
       }
      
@@ -184,15 +185,15 @@ router.post('/vote-o/:contentId', function(req, res, next) {
   })
 });
 
-//simple contentId 글에 반대하기
+//deep contentId 글에 반대하기
 router.post('/vote-x/:contentId', function(req, res, next) {
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
     if(!err){
-      console.log("MongoDb Connected - simple vote-x")
+      console.log("MongoDb Connected - deep vote-x")
     }
     const db = client.db("hci")
-    const simple = db.collection('simple')
+    const deep = db.collection('deep')
     var contentId = req.params.contentId
     var voterId  = req.body.voter 
     var voterGender = req.body.voterGender + "X"
@@ -203,7 +204,7 @@ router.post('/vote-x/:contentId', function(req, res, next) {
     var xContentId = new ObjectId(contentId);
 
 
-    if((await simple.findOne({$and: 
+    if((await deep.findOne({$and: 
       [
         {_id:xContentId},
         {voter : {$in:[voterId]}}, 
@@ -213,19 +214,19 @@ router.post('/vote-x/:contentId', function(req, res, next) {
     }else{
       console.log("OkOKOK")
       //투표 안했는데 추가정보 O에 입력한 경우
-      if(await simple.findOne( {$and:[{_id:xContentId},{plusOSetter : {$in:[voterId]}} ]} )){
-        await simple.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusOvoteX : 1  } })
-        await simple.update({_id:xContentId},{$push: { voter : voterId , xvoter : voterId}})
+      if(await deep.findOne( {$and:[{_id:xContentId},{plusOSetter : {$in:[voterId]}} ]} )){
+        await deep.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusOvoteX : 1  } })
+        await deep.update({_id:xContentId},{$push: { voter : voterId , xvoter : voterId}})
 
       //투표 안했는데 추가정보 X에 입력한 경우
-      }else if(await simple.findOne({$and:[{_id:xContentId},{plusXSetter : {$in:[voterId]}} ]})){
-        await simple.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusXvoteX : 1  } })
-        await simple.update({_id:xContentId},{$push: { voter : voterId , xvoter : voterId}})
+      }else if(await deep.findOne({$and:[{_id:xContentId},{plusXSetter : {$in:[voterId]}} ]})){
+        await deep.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1 , plusXvoteX : 1  } })
+        await deep.update({_id:xContentId},{$push: { voter : voterId , xvoter : voterId}})
 
       //투표 안했고 , 추가 정보 입력안한 경우
       }else{
-        await simple.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1  } })
-        await simple.update({_id:xContentId},{$push: { voter : voterId , xvoter : voterId}})
+        await deep.update({_id:xContentId},{ $inc: { xVote: 1 , [voterGender] : 1 , [voterBirth] : 1, [voterJob] : 1 , [voterLive] : 1  } })
+        await deep.update({_id:xContentId},{$push: { voter : voterId , xvoter : voterId}})
         
       }
     }
@@ -233,7 +234,7 @@ router.post('/vote-x/:contentId', function(req, res, next) {
   })
 });
 
-//simple contentId 글의 추가 정보 설정하고 / 그에 맞게 올려주기
+//deep contentId 글의 추가 정보 설정하고 / 그에 맞게 올려주기
 router.post('/set-plus-o/:contentId', function(req, res, next) {
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
@@ -241,14 +242,14 @@ router.post('/set-plus-o/:contentId', function(req, res, next) {
       console.log("MongoDb Connected - set-plus-o")
     }
     const db = client.db("hci")
-    const simple = db.collection('simple')
+    const deep = db.collection('deep')
     var contentId = req.params.contentId
     var voterId  = req.body.voter
     console.log("찾으려는 글의 _id 값 : " + contentId)      
     var oContentId = new ObjectId(contentId);
    
     //있으면
-    if(await simple.findOne({$and: 
+    if(await deep.findOne({$and: 
       [
         {_id:oContentId},
         {
@@ -262,23 +263,23 @@ router.post('/set-plus-o/:contentId', function(req, res, next) {
     })){
       console.log("set-plus-o nothing")
     }else{
-      await simple.update({_id:oContentId},{$push: { plusOSetter : voterId}})
-      if(await simple.findOne({$and: 
+      await deep.update({_id:oContentId},{$push: { plusOSetter : voterId}})
+      if(await deep.findOne({$and: 
         [
           {_id:oContentId},
           {ovoter : {$in:[voterId]}}, 
         ]
       })){
         //o를 투표한 사람인 경우
-        await simple.update({_id:oContentId},{ $inc: { plusOvoteO : 1} })
-      }else if(await simple.findOne({$and: 
+        await deep.update({_id:oContentId},{ $inc: { plusOvoteO : 1} })
+      }else if(await deep.findOne({$and: 
         [
           {_id:oContentId},
           {xvoter : {$in:[voterId]}}, 
         ]
       })){
         //x를 투표한 사람인 경우
-        await simple.update({_id:oContentId},{ $inc: { plusOvoteX : 1} })
+        await deep.update({_id:oContentId},{ $inc: { plusOvoteX : 1} })
       }else{
         console.log("투표를 아직 안함")
       }
@@ -295,14 +296,14 @@ router.post('/set-plus-x/:contentId', function(req, res, next) {
       console.log("MongoDb Connected - set-plus-o")
     }
     const db = client.db("hci")
-    const simple = db.collection('simple')
+    const deep = db.collection('deep')
     var contentId = req.params.contentId
     var voterId  = req.body.voter
     console.log("찾으려는 글의 _id 값 : " + contentId)      
     var xContentId = new ObjectId(contentId);
     console.log("test - 1")
     //있으면
-    if(await simple.findOne({$and: 
+    if(await deep.findOne({$and: 
       [
         {_id:xContentId},
         {
@@ -317,8 +318,8 @@ router.post('/set-plus-x/:contentId', function(req, res, next) {
       console.log("test - 2")
       console.log("set-plus-x nothing")
     }else{
-      await simple.update({_id:xContentId},{$push: { plusXSetter : voterId}})
-      if(await simple.findOne({$and: 
+      await deep.update({_id:xContentId},{$push: { plusXSetter : voterId}})
+      if(await deep.findOne({$and: 
         [
           {_id:xContentId},
           {ovoter : {$in:[voterId]}}, 
@@ -326,8 +327,8 @@ router.post('/set-plus-x/:contentId', function(req, res, next) {
       })){
         //o를 투표한 사람인 경우
         console.log("test - 3")
-        await simple.update({_id:xContentId},{ $inc: { plusXvoteO : 1} })
-      }else if(await simple.findOne({$and: 
+        await deep.update({_id:xContentId},{ $inc: { plusXvoteO : 1} })
+      }else if(await deep.findOne({$and: 
         [
           {_id:xContentId},
           {xvoter : {$in:[voterId]}}, 
@@ -335,7 +336,7 @@ router.post('/set-plus-x/:contentId', function(req, res, next) {
       })){
         console.log("test - 4")
         //x를 투표한 사람인 경우
-        await simple.update({_id:xContentId},{ $inc: { plusXvoteX : 1} })
+        await deep.update({_id:xContentId},{ $inc: { plusXvoteX : 1} })
       }else{
         console.log("test - 5")
         console.log("투표를 아직 안함")
@@ -350,7 +351,7 @@ router.post('/set-plus-x/:contentId', function(req, res, next) {
 //   MongoClient.connect("mongodb://localhost:27017",
 //   {useNewUrlParser:true},async(err,client)=>{
 //     if(!err){
-//       console.log("MongoDb Connected - readSimple")
+//       console.log("MongoDb Connected - readdeep")
 //     }
 //     const db = client.db("hci")
 //     const deep = db.collection('deep')
@@ -363,13 +364,11 @@ router.post('/set-plus-x/:contentId', function(req, res, next) {
 
 
 router.post('/content/:id' ,function(req, res, next){
-  console.log("content:id        ")
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
     if(!err){
-      console.log("MongoDb Connected - readSimple")
+      console.log("MongoDb Connected - readdeep")
     }
-    console.log("content:id         접그s     d d d d d d d ")
     const db = client.db("hci")
     const deep = db.collection('deep')
     var id = req.params.id //글 아이디
@@ -385,27 +384,28 @@ router.post('/comment/:id' ,function(req, res, next){
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
     if(!err){
-      console.log("MongoDb Connected - readSimple")
+      console.log("MongoDb Connected - readdeep")
     }
     const db = client.db("hci")
     const deep = db.collection('deep')
-    const id = req.params.id
-   
+    var id = req.params.id
+    var id = new ObjectId(id);
+    await deep.updateOne(
+      {_id:id},
+      { 
+        $push: 
+        { 
+          commentList: 
+          {
+            comment : req.body.comment,
+            author :  req.body.author
+          }
+        } 
+      })
+    res.send("good")
   })
 });
 
-router.post('/stats/:id' ,function(req, res, next){
-  MongoClient.connect("mongodb://localhost:27017",
-  {useNewUrlParser:true},async(err,client)=>{
-    if(!err){
-      console.log("MongoDb Connected - readSimple")
-    }
-    const db = client.db("hci")
-    const deep = db.collection('deep')
-    const id = req.params.id
-   
-  })
-});
 
 
 

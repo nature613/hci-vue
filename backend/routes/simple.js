@@ -126,7 +126,7 @@ router.post('/write',(req,res)=>{
     res.send("good")
   })
 })
-
+ 
 //simple contentId 글에 찬성하기
 router.post('/vote-o/:contentId', function(req, res, next) {
   MongoClient.connect("mongodb://localhost:27017",
