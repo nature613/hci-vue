@@ -8,16 +8,15 @@
             
               <v-layout column>
                 <v-flex>
-                  <p>{{deepContent.title}}</p>
+                  <p><b>{{deepContent.title}}</b></p>
                 </v-flex>
                 <v-flex>
                   <p>{{deepContent.content}}</p>
                 </v-flex>
                 <v-flex>
-                  <p>O : {{deepContent.O}}</p>
-                  <p>X : {{deepContent.X}}</p>
+                  <p><b>O</b> : {{deepContent.O}}</p>
+                  <p><b>X</b> : {{deepContent.X}}</p>
                 </v-flex>
-                <p>투표하기</p>
                 <v-layout v-if="deepContent.voter.includes(userId) === false" row>
                   <v-flex>
                     <v-btn @click="deepVoteO(deepContent._id)" block>{{deepContent.O}}(O)</v-btn>
@@ -66,14 +65,13 @@
                 </p>
 
 
-
-
-                <!-- <v-textarea
-                    box
+                <v-textarea
+                    id="comment"
+                    solo
                     label="댓글"
-                    v-model="writeComment"
+                    v-model="deepWriteComment"
                   ></v-textarea>
-                  <v-btn block>댓글 작성</v-btn> -->
+                  <v-btn block @click="deepAddComment">댓글 작성</v-btn>
                   
               </v-layout>
             </v-card-text>
@@ -94,7 +92,8 @@ export default {
   data:function(){
     return{
       deepContent: '',
-      userId : ''
+      userId : '',
+      deepWriteComment : ''
     }
   },
   methods:{
@@ -237,6 +236,19 @@ export default {
         voterBirth : voterBirth,
       }
     },
+
+    deepAddComment:function(){
+      console.log(this.deepWriteComment)
+      console.log(this.$route.params.id)
+      this.$http.post(`/deep/comment/${this.$route.params.id}`,
+      {
+        comment : this.deepWriteComment,
+        author : this.userId
+      }).then((response)=>{
+        alert("댓글이 작성되었습니다")
+        this.$router.go()
+      })
+    }
   },
   mounted:function(){
     var userData = this.$session.get('userData')    
@@ -245,7 +257,9 @@ export default {
   }
 }
 </script>
-<style>
-
+<style scoped>
+  #comment{
+    font-size : 10px
+  }
 </style>
  

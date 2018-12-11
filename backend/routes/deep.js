@@ -364,13 +364,11 @@ router.post('/set-plus-x/:contentId', function(req, res, next) {
 
 
 router.post('/content/:id' ,function(req, res, next){
-  console.log("content:id        ")
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
     if(!err){
       console.log("MongoDb Connected - readdeep")
     }
-    console.log("content:id         접그s     d d d d d d d ")
     const db = client.db("hci")
     const deep = db.collection('deep')
     var id = req.params.id //글 아이디
@@ -390,23 +388,24 @@ router.post('/comment/:id' ,function(req, res, next){
     }
     const db = client.db("hci")
     const deep = db.collection('deep')
-    const id = req.params.id
-   
+    var id = req.params.id
+    var id = new ObjectId(id);
+    await deep.updateOne(
+      {_id:id},
+      { 
+        $push: 
+        { 
+          commentList: 
+          {
+            comment : req.body.comment,
+            author :  req.body.author
+          }
+        } 
+      })
+    res.send("good")
   })
 });
 
-router.post('/stats/:id' ,function(req, res, next){
-  MongoClient.connect("mongodb://localhost:27017",
-  {useNewUrlParser:true},async(err,client)=>{
-    if(!err){
-      console.log("MongoDb Connected - readdeep")
-    }
-    const db = client.db("hci")
-    const deep = db.collection('deep')
-    const id = req.params.id
-   
-  })
-});
 
 
 
