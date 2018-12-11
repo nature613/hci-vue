@@ -86,5 +86,62 @@ router.post('/me',function(req,res){
   })
 }) 
 
+router.post('/find',(req,res)=>{
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - Me")
+    }
+    const db = client.db("hci")
+    const people = db.collection('people')
+    console.log(req.body)
+    const user = await people.findOne({userId:req.body.id})
+    console.log(user)
+    res.send(user)
+  })
+})
+
+router.post('/modify',(req,res)=>{
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - Me")
+    }
+    const db = client.db("hci")
+    const people = db.collection('people')
+    console.log(req.body)
+    await people.update({id : req.body.userId}, {$set:
+      { 
+        userName : req.body.userName,
+        userPw:req.body.userPw,
+        userGender : req.body.userGender,
+        userBirth : req.body.userBirth,
+        userJob : req.body.userJob,
+        userLive  : req.body.userLive
+      }
+    })
+    res.send("modify complete")
+  })
+})
+
+router.post('/withdrawal',(req,res)=>{
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - Me")
+    }
+    const db = client.db("hci")
+    const people = db.collection('people')
+    console.log(req.body)
+    var u_id =  req.body.userId
+    await people.remove({id:u_id}) //usedata 삭제
+    await StupidGreatModel.remove({id:u_id})  //쓴 stupidgreat 삭제
+    await accountModel.remove({id:u_id})  //쓴 가계부 삭제
+    await boardModel.remove({id:u_id})  //쓴 글 삭제
+    res.send("withdrawal complete")
+    res.send("modify complete")
+  })
+})
+
 
 module.exports = router;

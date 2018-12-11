@@ -13,6 +13,7 @@ var usersRouter = require('./routes/users');
 var writeRouter = require('./routes/write');
 var simpleRouter = require('./routes/simple');
 var testRouter = require('./routes/test')
+var deepRouter = require('./routes/deep')
 
 var app = express();
 app.use(require('connect-history-api-fallback')())
@@ -31,6 +32,7 @@ app.use('/users', usersRouter);
 app.use('/write',writeRouter);
 app.use('/simple',simpleRouter)
 app.use('/test',testRouter);
+app.use('/deep',deepRouter);
 
 
 

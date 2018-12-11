@@ -17,19 +17,21 @@
           expand
         >
           <v-expansion-panel-content
-            v-for="(item, i) in 20"
+            v-for="(item, i) in deepList.slice().reverse()"
             :key="i"
-          >
+            expand-icon=""
+          > 
             <div slot="header">
               <v-layout column>
-                <v-flex>
-                  <div>짜장 짬뽕 </div>
-                  <v-btn>통계보기</v-btn>
-                </v-flex>
-                <v-flex>
-                  <v-btn block>투표하기 / 댓글쓰기</v-btn>
-                  
-                </v-flex>
+                <v-layout row>
+                  <v-flex>
+                    {{item.title}}
+                  </v-flex>
+                  <v-flex>
+                    <v-btn>통계보기</v-btn>
+                  </v-flex>
+                </v-layout>
+                <v-btn block>투표하기 / 댓글쓰기</v-btn>
               </v-layout>
             </div>
             <v-card>
@@ -52,6 +54,25 @@ export default {
   components:{
     Toolbar,
     SearchBar
+  },
+  data:function(){
+    return{
+      deepList : null
+    }
+  },
+  methods:{
+    getDeepList:function(){
+      this.$http.post('/deep/read').then((response)=>{
+        console.log(response)
+        console.log(response.data)
+        this.deepList = response.data
+      })
+    }
+  },
+  mounted:function(){ 
+    var userData = this.$session.get('userData')  
+    this.userId = userData.userId
+    this.getDeepList()
   }
 }
 

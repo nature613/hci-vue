@@ -11,7 +11,6 @@
             글쓰기 
           </v-btn>
         </v-flex>
-
          <v-expansion-panel
           v-model="panel"
           expand
@@ -90,9 +89,9 @@
                     <v-card flat>
                       <v-card-text>
                         <AllPieChart :allO="item.oVote" :allX="item.xVote" :width="279" :height="230"></AllPieChart>
-                        <p>-------O/X-------</p>
+                        <!-- <p>-------O/X-------</p>
                         <p>O : {{item.oVote}} {{item.oVote/(item.oVote+item.xVote)*100}}%</p>
-                        <p>X : {{item.xVote}} {{item.xVote/(item.oVote+item.xVote)*100}}%</p>
+                        <p>X : {{item.xVote}} {{item.xVote/(item.oVote+item.xVote)*100}}%</p> -->
                       </v-card-text>
                     </v-card>
                   </v-tab-item>
@@ -107,11 +106,11 @@
                             <GenderFemalePieChart :femaleO="item.genderFemaleO" :femaleX="item.genderFemaleX" :width="134" :height="230"></GenderFemalePieChart>
                           </v-flex>
                         </v-layout>
-                        <p>-------성별-------</p>
+                        <!-- <p>-------성별-------</p>
                         <p>남자 O: {{item.genderMaleO}}</p>
                         <p>남자 X: {{item.genderMaleX}}</p>
                         <p>여자 O: {{item.genderFemaleO}}</p>
-                        <p>여자 X: {{item.genderFemaleX}}</p>
+                        <p>여자 X: {{item.genderFemaleX}}</p> -->
                       </v-card-text>
                     </v-card>
                   </v-tab-item>
@@ -122,7 +121,7 @@
                         :ageOneO="item.ageOneO" :ageOneX="item.ageOneX" :ageTwoO="item.ageTwoO" :ageTwoX="item.ageTwoX" 
                         :ageThreeO="item.ageThreeO" :ageThreeX="item.ageThreeX" :ageFourO="item.ageFourO" :ageFourX="item.ageFourX" 
                         :ageUpFiveO="item.ageUpFiveO" :ageUpFiveX="item.ageUpFiveX"></AgeRadarChart>
-                        <p>-------나이대-------</p>
+                        <!-- <p>-------나이대-------</p>
                         <p>10세 미만 O: {{item.ageZeroO}}</p>
                         <p>10세 미만 X: {{item.ageZeroX}}</p>
                         <p>10대 O: {{item.ageOneO}}</p>
@@ -134,7 +133,7 @@
                         <p>40대 O: {{item.ageFourO}}</p>
                         <p>40대 X: {{item.ageFourX}}</p>
                         <p>50대이상 O: {{item.ageUpFiveO}}</p>
-                        <p>50대이상 X: {{item.ageUpFiveX}}</p>
+                        <p>50대이상 X: {{item.ageUpFiveX}}</p> -->
                       </v-card-text>
                     </v-card>
                   </v-tab-item>
@@ -146,7 +145,7 @@
                         :jobHouseWifeO="item.jobHouseWifeO" :jobHouseWifeX="item.jobHouseWifeX" :jobCompanyO="item.jobCompanyO" :jobCompanyX="item.jobCompanyX"
                         :jobSelfO="item.jobSelfO" :jobSelfX="item.jobSelfX" :jobArtO="item.jobArtO" :jobArtX="item.jobArtX"
                         :jobEtcO="item.jobEtcO" :jobEtcX="item.jobEtcX"></JobRadarChart>
-                        <p>-------직업-------</p>
+                        <!-- <p>-------직업-------</p>
                         <p>무직 O: {{item.jobNoneO}}</p>
                         <p>무직 X: {{item.jobNoneX}}</p>
                         <p>중학생 O: {{item.jobMiddleO}}</p>
@@ -164,7 +163,7 @@
                         <p>예체능계열 O: {{item.jobArtO}}</p>
                         <p>예체능계열 X: {{item.jobArtX}}</p>
                         <p>기타 O: {{item.jobEtcO}}</p>
-                        <p>기타 X: {{item.jobEtcX}}</p>
+                        <p>기타 X: {{item.jobEtcX}}</p> -->
                       </v-card-text>
                     </v-card>
                   </v-tab-item>
@@ -175,7 +174,7 @@
                         :liveGwO="item.liveGwO" :liveGwX="item.liveGwX" :liveCcO="item.liveCcO" :liveCcX="item.liveCcX"
                         :liveJlO="item.liveJlO" :liveJlX="item.liveJlX" :liveGsO="item.liveGsO" :liveGsX="item.liveGsX"
                         :liveJjO="item.liveJjO" :liveJjX="item.liveJjX"></LiveRadarChart>
-                        <p>-------사는곳-------</p>
+                        <!-- <p>-------사는곳-------</p>
                         <p>서울특별시 O: {{item.liveSsO}}</p>
                         <p>서울특별시 X: {{item.liveSsX}}</p>
                         <p>경기도 O: {{item.liveGgO}}</p>
@@ -189,7 +188,7 @@
                         <p>경상도 O: {{item.liveGsO}}</p>
                         <p>경상도 X: {{item.liveGsX}}</p>
                         <p>제주도 O: {{item.liveJjO}}</p>
-                        <p>제주도 X: {{item.liveJjX}}</p>
+                        <p>제주도 X: {{item.liveJjX}}</p> -->
                       </v-card-text>
                     </v-card>
                   </v-tab-item>
@@ -204,12 +203,12 @@
                             <PlusXPieChart :plusXvoteO="item.plusXvoteO" :plusXvoteX="item.plusXvoteX"  :width="134" :height="230"></PlusXPieChart>
                           </v-flex>
                         </v-layout>
-                        <p>-------투표자가 원하는 추가 정보-------</p>
+                        <!-- <p>-------투표자가 원하는 추가 정보-------</p>
                         <p>{{item.plusContent}}</p>
                         <p>{{item.plusO}}를 선택한 사람 중 O : {{item.plusOvoteO}}</p>
                         <p>{{item.plusO}}를 선택한 사람 중 X  : {{item.plusOvoteX}}</p>
                         <p>{{item.plusX}}를 선택한 사람 중 O  : {{item.plusXvoteO}}</p>
-                        <p>{{item.plusX}}를 선택한 사람 중 X  : {{item.plusXvoteX}}</p>
+                        <p>{{item.plusX}}를 선택한 사람 중 X  : {{item.plusXvoteX}}</p> -->
                       </v-card-text>
                     </v-card>
                   </v-tab-item>
@@ -224,7 +223,6 @@
 
       </v-layout>
     </v-container>
-    <v-btn @click="getSimpleList">test button</v-btn>
     <!-- {{simpleList}} -->
   </div>
 </template>
@@ -240,7 +238,6 @@ import JobRadarChart from './chart/JobRadarChart.vue'
 import LiveRadarChart from  './chart/LiveRadarChart.vue'
 import PlusOPieChart from './chart/PlusOPieChart.vue'
 import PlusXPieChart from './chart/PlusXPieChart.vue'
-import TestRadarChart from './chart/TestRadarChart.vue'
 
 
 export default {
@@ -256,7 +253,6 @@ export default {
     LiveRadarChart,
     PlusOPieChart,
     PlusXPieChart,
-    TestRadarChart
   },
   data:function(){
     return{

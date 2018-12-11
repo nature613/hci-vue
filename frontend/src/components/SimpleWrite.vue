@@ -93,7 +93,7 @@
 
       </v-layout>
 
-      <p>*****test value*****</p>
+      <!-- <p>*****test value*****</p>
       <p>simpleWriteContent {{simpleWriteContent}}</p>
       <p>simpleWriteO {{simpleWriteO}}</p>
       <p>simpleWriteX {{simpleWriteX}}</p>
@@ -101,7 +101,7 @@
       <p>simplePlusO {{simplePlusO}}</p>
       <p>simplePlusX {{simplePlusX}}</p>
 
-      <p>*****test value*****</p>
+      <p>*****test value*****</p> -->
     </v-container>
   </div>
 </template>
@@ -128,9 +128,12 @@ export default {
   },
   methods:{
     simpleWriteProcess:function(){
+      var userData = this.$session.get('userData')  
+      var userId = userData.userId
       this.$http.post('/simple/write',
       {
         simpleWriteContent : this.simpleWriteContent,
+        simpleWriteAuthor : userId,
         simpleWriteO : this.simpleWriteO,
         simpleWriteX : this.simpleWriteX,
         simplePlusContent : this.simplePlusContent,

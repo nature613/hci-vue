@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const auth = require('../auth.js')
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 var ObjectId = mongodb.ObjectId;  
 
-//simple 글 리스트 찾아오기
+//deep 글 리스트 찾아오기
 router.post('/read', function(req, res, next) {
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
@@ -13,16 +12,16 @@ router.post('/read', function(req, res, next) {
       console.log("MongoDb Connected - readSimple")
     }
     const db = client.db("hci")
-    const simple = db.collection('simple')
-    console.log("simple list 불러오기 ")
-    var simpleList = await simple.find().toArray()
-    // console.log("simpleList " + simpleList);
-    // console.log(simpleList)
-    res.send(simpleList)
+    const deep = db.collection('deep')
+    console.log("deep list 불러오기 ")
+    var deepList = await deep.find().toArray()
+    console.log("deepList " + deepList);
+    console.log(deepList)
+    res.send(deepList)
   })
 });
 
-//simple 글 쓰기
+//deep 글 쓰기
 router.post('/write',(req,res)=>{
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
@@ -30,33 +29,33 @@ router.post('/write',(req,res)=>{
       console.log("MongoDb Connected - SimpleWrite")
     }
     const db = client.db("hci")
-    const simple = db.collection('simple')
-
-
-    var simpleWriteContent = req.body.simpleWriteContent
-    var simpleWriteAuthor = req.body.simpleWriteAuthor
-    var simpleWriteO = req.body.simpleWriteO
-    var simpleWriteX = req.body.simpleWriteX
-    var simplePlusContent = req.body.simplePlusContent
-    var simplePlusO = req.body.simplePlusO
-    var simplePlusX = req.body.simplePlusX
-
-    console.log("사용자가 입력한 글 조건 : " + simpleWriteContent)
-    console.log("사용자가 입력한 O : " + simpleWriteO)
-    console.log("사용자가 입력한 X : " + simpleWriteX)
-    console.log("사용자가 입력한 추가정보 내용 : " + simplePlusContent)
-    console.log("사용자가 입력한 추가정보 O : " + simplePlusO)
-    console.log("사용자가 입력한 추가정보 X : " + simplePlusX)
+    const deep = db.collection('deep')
     
-    await simple.insertOne(
+    var deepWriteTitle = req.body.deepWriteTitle
+    var deepWriteContent = req.body.deepWriteContent
+    var deepWriteO = req.body.deepWriteO
+    var deepWriteX = req.body.deepWriteX
+    var deepPlusContent = req.body.deepPlusContent
+    var deepPlusO = req.body.deepPlusO
+    var deepPlusX = req.body.deepPlusX
+
+    console.log("사용자가 입력한 글 제목 : " + deepWriteTitle)
+    console.log("사용자가 입력한 글 조건 : " + deepWriteContent)
+    console.log("사용자가 입력한 O : " + deepWriteO)
+    console.log("사용자가 입력한 X : " + deepWriteX)
+    console.log("사용자가 입력한 추가정보 내용 : " + deepPlusContent)
+    console.log("사용자가 입력한 추가정보 O : " + deepPlusO)
+    console.log("사용자가 입력한 추가정보 X : " + deepPlusX)
+    
+    await deep.insertOne(
       {
-        content:simpleWriteContent, 
-        author : simpleWriteAuthor,
-        O:simpleWriteO, 
-        X:simpleWriteX,
-        plusContent : simplePlusContent,
-        plusO : simplePlusO,
-        plusX : simplePlusX,
+        title : deepWriteTitle,
+        content:deepWriteContent, 
+        O:deepWriteO, 
+        X:deepWriteX,
+        plusContent : deepPlusContent,
+        plusO : deepPlusO,
+        plusX : deepPlusX,
         plusOvoteO : 0,
         plusOvoteX : 0,
         plusXvoteO : 0,
