@@ -33,6 +33,7 @@ router.post('/write',(req,res)=>{
     
     var deepWriteTitle = req.body.deepWriteTitle
     var deepWriteContent = req.body.deepWriteContent
+    var deepWriteAuthor = req.body.deepWriteAuthor
     var deepWriteO = req.body.deepWriteO
     var deepWriteX = req.body.deepWriteX
     var deepPlusContent = req.body.deepPlusContent
@@ -41,6 +42,7 @@ router.post('/write',(req,res)=>{
 
     console.log("사용자가 입력한 글 제목 : " + deepWriteTitle)
     console.log("사용자가 입력한 글 조건 : " + deepWriteContent)
+    console.log("사용자가 아이디 : " +deepWriteAuthor)
     console.log("사용자가 입력한 O : " + deepWriteO)
     console.log("사용자가 입력한 X : " + deepWriteX)
     console.log("사용자가 입력한 추가정보 내용 : " + deepPlusContent)
@@ -50,7 +52,8 @@ router.post('/write',(req,res)=>{
     await deep.insertOne(
       {
         title : deepWriteTitle,
-        content:deepWriteContent, 
+        content:deepWriteContent,
+        author:deepWriteAuthor, 
         O:deepWriteO, 
         X:deepWriteX,
         plusContent : deepPlusContent,
@@ -342,6 +345,66 @@ router.post('/set-plus-x/:contentId', function(req, res, next) {
   })
 });
 
+// router.post('/content/:id', function(req, res, next) {
+//   MongoClient.connect("mongodb://localhost:27017",
+//   {useNewUrlParser:true},async(err,client)=>{
+//     if(!err){
+//       console.log("MongoDb Connected - readSimple")
+//     }
+//     const db = client.db("hci")
+//     const deep = db.collection('deep')
+//     const id = req.params.id
+//     console.log(id)
+    
+//     res.send("good")
+//   })
+// });
+
+
+router.post('/content/:id' ,function(req, res, next){
+  console.log("content:id        ")
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readSimple")
+    }
+    console.log("content:id         접그s     d d d d d d d ")
+    const db = client.db("hci")
+    const deep = db.collection('deep')
+    var id = req.params.id //글 아이디
+    var id = new ObjectId(id);
+    console.log(id)
+    var content = await deep.findOne({_id:id})
+    console.log(content)
+    res.send(content)
+  })
+});
+
+router.post('/comment/:id' ,function(req, res, next){
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readSimple")
+    }
+    const db = client.db("hci")
+    const deep = db.collection('deep')
+    const id = req.params.id
+   
+  })
+});
+
+router.post('/stats/:id' ,function(req, res, next){
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readSimple")
+    }
+    const db = client.db("hci")
+    const deep = db.collection('deep')
+    const id = req.params.id
+   
+  })
+});
 
 
 

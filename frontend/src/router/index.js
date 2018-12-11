@@ -107,6 +107,26 @@ export default new Router({
       path: '/my',
       name: 'MyPage',
       component: MyPage
-    }
+    },
+    {
+      path: '/deep-main/:id',
+      name: 'DeepMain',
+      component: () => import('../components/DeepMain.vue'),
+    },
+    {
+      path: '/deep-content/:id',
+      name: 'DeepContent',
+      component: () => import('../components/DeepContent.vue'),
+    },
+    {
+      path: '/deep-stats/:id',
+      name: 'DeepStats',
+      component: () => import('../components/DeepStats.vue'),
+    },
+    {
+      path: '/deep-comment/:id',
+      name: 'DeepComment',
+      component: () => import('../components/DeepComment.vue'),
+    },
   ]
 })
