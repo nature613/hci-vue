@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Toolbar></Toolbar>
-    <v-container>
+    <!-- <v-container>
       <v-layout column>
         <v-flex xs12>
           <SearchBar></SearchBar>
@@ -20,7 +19,7 @@
 
 
       </v-layout>
-    </v-container>
+    </v-container> -->
 
     <p>Me-vote</p>
   </div>
@@ -32,7 +31,6 @@ import SearchBar from './SearchBar.vue'
 export default {
   name: 'MeVote',
   components:{
-    Toolbar,
     SearchBar,
   }
 }

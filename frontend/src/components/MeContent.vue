@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Toolbar></Toolbar>
-    <v-container>
+    <!-- <v-container>
       <v-layout column>
         <v-flex xs12>
           <SearchBar></SearchBar>
@@ -20,11 +19,11 @@
 
 
       </v-layout>
-    </v-container>
+    </v-container> -->
 
 
 
-    
+    내가 쓴 글
 
 
   <v-menu
@@ -51,13 +50,11 @@
 </template>
 <script>
 
-import Toolbar from './Toolbar.vue'
 import SearchBar from './SearchBar.vue'
 
 export default {
   name: 'MeContent',
   components:{
-    Toolbar,
     SearchBar,
   },
   data:function(){

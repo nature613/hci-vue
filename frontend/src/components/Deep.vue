@@ -12,58 +12,6 @@
           </v-btn>
         </v-flex>
 
-         <!-- <v-expansion-panel
-          v-model="panel"
-          expand
-        >
-          <v-expansion-panel-content
-            v-for="(item, i) in deepList.slice().reverse()"
-            :key="i"
-            expand-icon=""
-          > 
-            <div slot="header">
-              <v-layout column>
-                <v-layout row>
-                  <v-flex>
-                    {{item.title}}
-                  </v-flex>
-                </v-layout>
-                <v-layout>
-                  <v-flex>
-                    <v-btn>통계보기</v-btn>
-                  </v-flex>
-                  <v-flex>
-                    <v-btn block>투표하기 / 댓글쓰기</v-btn>
-                  </v-flex>
-                </v-layout>
-              </v-layout>
-            </div>
-            <v-card>
-              <v-card-text class="grey lighten-3">{{item.content}}</v-card-text>
-            </v-card>
-          </v-expansion-panel-content>
-        </v-expansion-panel> -->
-
-        <!-- <v-card>
-          <v-data-table
-            :headers="headers"
-            :items="deepList"
-            :search="search"
-            hide-actions=true
-          >
-            <template slot="items" slot-scope="props">
-              <td>{{ props.item.title }}</td>
-              <v-spacer></v-spacer>
-              <td>댓글 수</td>
-              <td class="text-xs-right">{{ props.item.calories }}</td>
-              <td class="text-xs-right">{{ props.item.calories }}</td>
-            </template>
-            <v-alert slot="no-results" :value="true" color="error" icon="warning">
-              "{{ search }}"에 대한 검색 결과가 없습니다.
-            </v-alert>
-          </v-data-table>
-        </v-card> -->
-
         <v-card>
         <v-data-table :items="deepList" class="elevation-1" hide-actions :headers="headers">
           <template slot="items" slot-scope="props">
@@ -87,29 +35,6 @@
           </template>
         </v-data-table>
       </v-card>
-
-      <!-- <v-data-table
-          :headers="headers"
-          :items="deepList"
-          item-key="name"
-        >
-          <template slot="items" slot-scope="props">
-            <tr @click="props.expanded = !props.expanded">
-              <td>{{props.item.title}}</td>
-              <td><v-icon>comment</v-icon></td>
-              <td><v-icon>how_to_vote</v-icon></td>
-              <td><v-icon>equalizer</v-icon></td>
-            </tr>
-          </template>
-          <template slot="expand" slot-scope="props">
-            <v-card flat>
-              <v-card-text>Peek-a-boo!</v-card-text>
-            </v-card>
-          </template>
-        </v-data-table> -->
-
-
-
 
       </v-layout>
     </v-container>
@@ -154,23 +79,7 @@ export default {
         this.deepList = response.data.slice().reverse()
         this.items = response.data.slice().reverse()
       })
-    },
-    deepContentView:function(item){
-      console.log("item")
-      console.log(item._id)
-      this.$router.push(`/deep-main/${item._id}`)
-    },
-    deepCommentView:function(item){
-      console.log("item")
-      console.log(item)
-      this.$router.push(`/deep-comment/${item._id}`)
-    },
-    deepStatsView:function(item){
-      console.log("item")
-      console.log(item)
-      this.$router.push(`/deep-stats/${item._id}`)
-    },
-  
+    },  
   },
   mounted:function(){ 
     var userData = this.$session.get('userData')  

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Toolbar></Toolbar>
-    <v-container>
+    <!-- <v-container>
       <v-layout column>
         <v-flex xs12>
           <SearchBar></SearchBar>
@@ -20,20 +19,18 @@
 
 
       </v-layout>
-    </v-container>
+    </v-container> -->
 
 
-    mecontent
+    내가 쓴 댓글
   </div>
 </template>
 <script>
-import Toolbar from './Toolbar.vue'
 import SearchBar from './SearchBar.vue'
 
 export default {
   name: 'MeComment',
   components:{
-    Toolbar,
     SearchBar,
   }
 }

@@ -104,12 +104,17 @@ export default new Router({
       component: MeVote
     },
     {
+      path: '/me-tab',
+      name: 'MeTab',
+      component: () => import('../components/MeTab.vue'),
+    },
+    {
       path: '/my',
       name: 'MyPage',
       component: MyPage
     },
     {
-      path: '/deep-main/:id',
+      path: '/deep-main/:id/:tab',
       name: 'DeepMain',
       component: () => import('../components/DeepMain.vue'),
     },
