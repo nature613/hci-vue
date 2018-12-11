@@ -73,10 +73,10 @@
                     <v-card-text>
                       <v-layout row>
                         <v-flex>
-                          <PlusOPieChart :plusOvoteO="deepContent.plusOvoteO" :plusOvoteX="deepContent.plusOvoteX"  :width="134" :height="230"></PlusOPieChart>
+                          <PlusOPieChart :plusOvoteO="deepContent.plusOvoteO" :plusOvoteX="deepContent.plusOvoteX" :plusOContent="deepContent.plusContent+deepContent.plusO" :width="134" :height="230"></PlusOPieChart>
                         </v-flex>
                         <v-flex>
-                          <PlusXPieChart :plusXvoteO="deepContent.plusXvoteO" :plusXvoteX="deepContent.plusXvoteX"  :width="134" :height="230"></PlusXPieChart>
+                          <PlusXPieChart :plusXvoteO="deepContent.plusXvoteO" :plusXvoteX="deepContent.plusXvoteX" :plusXContent="deepContent.plusContent+deepContent.plusX" :width="134" :height="230"></PlusXPieChart>
                         </v-flex>
                       </v-layout>
                     </v-card-text>
