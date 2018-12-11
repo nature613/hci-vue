@@ -36,6 +36,7 @@
         </v-data-table>
       </v-card>
 
+
       </v-layout>
     </v-container>
   </div>
@@ -79,7 +80,23 @@ export default {
         this.deepList = response.data.slice().reverse()
         this.items = response.data.slice().reverse()
       })
-    },  
+    },
+    deepContentView:function(item){
+      console.log("item")
+      console.log(item._id)
+      this.$router.push(`/deep-main/${item._id}/0`)
+    },
+    deepCommentView:function(item){
+      console.log("item")
+      console.log(item)
+      this.$router.push(`/deep-main/${item._id}/1`)
+    },
+    deepStatsView:function(item){
+      console.log("item")
+      console.log(item)
+      this.$router.push(`/deep-main/${item._id}/2`)
+    },
+  
   },
   mounted:function(){ 
     var userData = this.$session.get('userData')  
