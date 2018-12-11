@@ -8,10 +8,14 @@
             
               <v-layout column>
                 <v-flex>
-                  <p>{{title}}</p>
+                  <p>{{deepContent.title}}</p>
                 </v-flex>
                 <v-flex>
-                  <p>{{content}}</p>
+                  <p>{{deepContent.content}}</p>
+                </v-flex>
+                <v-flex>
+                  <p>O : {{deepContent.O}}</p>
+                  <p>X : {{deepContent.X}}</p>
                 </v-flex>
                 <p>투표하기</p>
                 <v-layout row>
@@ -22,7 +26,7 @@
                     <v-btn block>X</v-btn>
                   </v-flex>
                 </v-layout>
-                <p>사용자 추가 정보</p>
+                <p>사용자 추가 정보 - {{deepContent.plusContent}}</p>
                 <v-layout row>
                   <v-flex>
                     <v-btn block>O</v-btn>
@@ -31,12 +35,12 @@
                     <v-btn block>X</v-btn>
                   </v-flex>
                 </v-layout>
-                <v-textarea
+                <!-- <v-textarea
                     box
                     label="댓글"
                     v-model="writeComment"
                   ></v-textarea>
-                  <v-btn block>댓글 작성</v-btn>
+                  <v-btn block>댓글 작성</v-btn> -->
                   
               </v-layout>
             </v-card-text>
@@ -56,8 +60,7 @@ export default {
   },
   data:function(){
     return{
-      title : '',
-      content: ''
+      deepContent: ''
     }
   },
   methods:{
@@ -69,11 +72,9 @@ export default {
     },
   },
   mounted:function(){
-    console.log(this.$route.params.id)
     this.$http.post(`/deep/content/${this.$route.params.id}`).then((response)=>{
     console.log(response.data)
-    this.title = response.data.title
-    this.content = response.data.content
+    this.deepContent = response.data
     })
   }
 }

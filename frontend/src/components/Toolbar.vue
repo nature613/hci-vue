@@ -62,7 +62,7 @@ export default {
         items: [
           { title: 'Simple', icon: 'chat_bubble_outline', address: 'simple'},
           { title: 'Deep', icon: 'chat_bubble' ,address:'deep'},
-          { title: '내가 쓴 글/댓글' ,icon:'create', address:'me-content'},
+          { title: '내가 쓴 글/댓글' ,icon:'create', address:'me-tab'},
           { title: '내 정보 관리', icon:'person_pin', address:'my'},
           // { title: '설정', icon:'settings', address:''},
           { title: '로그아웃' , icon:'keyboard_tab', address: 'logout'}

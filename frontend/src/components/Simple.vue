@@ -257,7 +257,6 @@ export default {
   data:function(){
     return{
       simpleList : null,
-      text: 'textmessage',
       tabList : [
         {name : "전체"},
         {name : "성별"},

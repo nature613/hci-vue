@@ -54,6 +54,7 @@ router.post('/write',(req,res)=>{
         title : deepWriteTitle,
         content:deepWriteContent,
         author:deepWriteAuthor, 
+        commentList : [],
         O:deepWriteO, 
         X:deepWriteX,
         plusContent : deepPlusContent,

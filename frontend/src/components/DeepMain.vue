@@ -6,7 +6,7 @@
         <v-flex xs12>          
           <SearchBar></SearchBar>
         </v-flex>
-        <v-tabs fixed-tabs>
+        <v-tabs fixed-tabs v-model="active_tab">
         <v-tab>
           본문보기
         </v-tab>
@@ -44,6 +44,20 @@ export default {
     DeepContent,
     DeepComment,
     DeepStats
+  },
+  data:function(){
+    return{
+      active_tab : null,
+    }
+  },
+  methods:{
+
+  },
+  mounted:function(){
+    
+  },
+  created:function(){
+    this.active_tab = Number(this.$route.params.tab)
   }
 }
 </script>
