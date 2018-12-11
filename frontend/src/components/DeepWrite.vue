@@ -137,10 +137,13 @@ export default {
   },
   methods:{
     deepWriteProcess:function(){
+      var userData = this.$session.get('userData')  
+      var userId = userData.userId
       this.$http.post('/deep/write',
       {
         deepWriteTitle : this.deepWriteTitle,
         deepWriteContent : this.deepWriteContent,
+        deepWriteAuthor : userId,
         deepWriteO : this.deepWriteO,
         deepWriteX : this.deepWriteX,
         deepPlusContent : this.deepPlusContent,
