@@ -403,6 +403,7 @@ router.post('/comment/:id' ,function(req, res, next){
     }
     const db = client.db("hci")
     const deep = db.collection('deep')
+    const comment = db.collection('comment')
     var id = req.params.id
     var id = new ObjectId(id);
     await deep.updateOne(
@@ -422,6 +423,11 @@ router.post('/comment/:id' ,function(req, res, next){
             gender : req.body.gender,
           }
         } 
+      })
+      await comment.insertOne({
+        comment : req.body.comment,
+        author : req.body.author,
+        contentId : req.body.contentId
       })
     res.send("good")
   })
@@ -471,6 +477,25 @@ router.post('/comment/:id/:status' ,function(req, res, next){
   })
 });
 
+
+router.post('/my-comment/:id' ,function(req, res, next){
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readdeep")
+    }
+    const db = client.db("hci")
+    const comment = db.collection('comment')
+    var id = req.params.id
+    var myCommentList = await comment.find(
+      { 
+       author : id
+      } 
+    ).toArray()
+    console.log(myCommentList)
+    res.send(myCommentList)
+  })
+});
 
 
 

@@ -240,15 +240,15 @@ export default {
     },
     //태어난 해를 입력하면 나이대를 알려줌
     parseBirthData:function(birth){
-      if(userData.userBirth > 2009){
+      if(birth > 2009){
         return "10세 미만"
-      }else if(userData.userBirth > 1999){
+      }else if(birth > 1999){
         return "10대"
-      }else if(userData.userBirth > 1989){
+      }else if(birth > 1989){
         return "20대"
-      }else if(userData.userBirth > 1979){
+      }else if(birth > 1979){
         return "30대"
-      }else if(userData.userBirth > 1969){
+      }else if(birth > 1969){
         return "40대"
       }else{
         return "50대 이상"
@@ -263,7 +263,8 @@ export default {
         live : this.userLive,
         birth : this.parseBirthData(this.userBirth),
         job : this.userJob,
-        gender : this.userGender
+        gender : this.userGender,
+        contentId : this.$route.params.id
       }).then((response)=>{
         alert("댓글이 작성되었습니다")
         this.$router.go()

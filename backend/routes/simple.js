@@ -361,6 +361,30 @@ router.post('/set-plus-x/:contentId', function(req, res, next) {
 });
 
 
+router.post('/vote/:id', function(req, res, next) {
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readSimple")
+    }
+    const db = client.db("hci")
+    const simple = db.collection('simple')
+    var id = req.params.id
+    console.log("내가 투표한 simple list 불러오기 ")
+    var simpleList = await simple.find(
+      {
+        voter : id
+      }
+    ).toArray()
+    console.log("asdihjaslidjasdkajsldasjkadjaslkjdlka")
+    console.log(simpleList)
+    console.log("asdihjaslidjasdkajsldasjkadjaslkjdlka")
+    res.send(simpleList)
+  })
+});
+
+
+
 
 
 module.exports = router;
