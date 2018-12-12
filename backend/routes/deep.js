@@ -497,6 +497,28 @@ router.post('/my-comment/:id' ,function(req, res, next){
   })
 });
 
+router.post('/vote/:id', function(req, res, next) {
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readSimple")
+    }
+    const db = client.db("hci")
+    const deep = db.collection('deep')
+    var id = req.params.id
+    console.log("내가 투표한 deep list 불러오기 ")
+    var deepList = await deep.find(
+      {
+        voter : id
+      }
+    ).toArray()
+    console.log("asdihjaslidjasdkajsldasjkadjaslkjdlka")
+    console.log(deepList)
+    console.log("asdihjaslidjasdkajsldasjkadjaslkjdlka")
+    res.send(deepList)
+  })
+});
+
 
 
 module.exports = router;

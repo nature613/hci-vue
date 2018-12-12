@@ -376,9 +376,7 @@ router.post('/vote/:id', function(req, res, next) {
         voter : id
       }
     ).toArray()
-    console.log("asdihjaslidjasdkajsldasjkadjaslkjdlka")
     console.log(simpleList)
-    console.log("asdihjaslidjasdkajsldasjkadjaslkjdlka")
     res.send(simpleList)
   })
 });
