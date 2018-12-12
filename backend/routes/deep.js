@@ -21,6 +21,21 @@ router.post('/read', function(req, res, next) {
   })
 });
 
+router.post('/read/:id', function(req, res, next) {
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readMeDeep")
+    }
+    const db = client.db("hci")
+    const deep = db.collection('deep')
+    var id = req.params.id
+    console.log("내가 쓴 deep list 불러오기 ")
+    var deepList = await deep.find({author : id}).toArray()
+    res.send(deepList)
+  })
+});
+
 //deep 글 쓰기
 router.post('/write',(req,res)=>{
   MongoClient.connect("mongodb://localhost:27017",
