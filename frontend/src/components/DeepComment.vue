@@ -8,7 +8,7 @@
                 <v-radio label="모든 댓글" value="all"></v-radio>
                 <v-radio label="조건에 맞는 댓글" value="notAll"></v-radio>
               </v-radio-group>
-              <v-tabs v-show="radioGroup === 'notAll'">
+              <v-tabs v-show="radioGroup === 'notAll'" fixed-tabs>
                 <v-tab
                   id="test"
                   v-for="i in tabList"
@@ -133,11 +133,6 @@
 
 
               </v-card>
-
-              selectedGender  : {{selectedGender}}
-              selectedLive : {{selectedLive}}
-              selectedBirth : {{selectedBirth}}
-              selectedJob : {{selectedJob}}
             </v-card-text>
           </v-card>
       </v-layout>

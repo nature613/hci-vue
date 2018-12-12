@@ -22,7 +22,7 @@
           </v-list-tile-avatar>
 
           <v-list-tile-content>
-            <v-list-tile-title>{{userData.userId}}님 안녕하세요!</v-list-tile-title>
+            <v-list-tile-title>{{userData.userName}}님 안녕하세요!</v-list-tile-title>
             <!-- <v-list-tile-title>{{userData.userName}}님 안녕하세요!</v-list-tile-title> -->
           </v-list-tile-content>
         </v-list-tile>

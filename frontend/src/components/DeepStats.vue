@@ -71,12 +71,17 @@
                 <v-tab-item lazy="true">
                   <v-card flat>
                     <v-card-text>
-                      <v-layout row>
+                      <v-layout row v-if="(deepContent.plusContent !== '')">
                         <v-flex>
                           <PlusOPieChart :plusOvoteO="deepContent.plusOvoteO" :plusOvoteX="deepContent.plusOvoteX" :plusOContent="deepContent.plusContent+deepContent.plusO" :width="134" :height="230"></PlusOPieChart>
                         </v-flex>
                         <v-flex>
                           <PlusXPieChart :plusXvoteO="deepContent.plusXvoteO" :plusXvoteX="deepContent.plusXvoteX" :plusXContent="deepContent.plusContent+deepContent.plusX" :width="134" :height="230"></PlusXPieChart>
+                        </v-flex>
+                      </v-layout>
+                      <v-layout v-else>
+                        <v-flex>
+                          <p>글쓴이가 등록한 추가 정보가 없습니다.</p>
                         </v-flex>
                       </v-layout>
                     </v-card-text>

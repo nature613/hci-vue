@@ -82,7 +82,7 @@
                   ></v-text-field>
                 </v-flex>
 
-                <v-flex xs12>
+                <!-- <v-flex xs12>
                   <v-text-field
                     label="비밀번호를 다시 입력해주세요"
                     id="userPwRe"
@@ -92,7 +92,7 @@
                     :rules="[() => !!userPwRe || 'This field is required']"
                     required
                   ></v-text-field>
-                </v-flex>
+                </v-flex> -->
 
                 <v-dialog v-model="dialogModify" persistent max-width="290">
                   <v-btn slot="activator" >수정 완료하기</v-btn>
@@ -300,7 +300,8 @@ export default {
     },
     //회원 탈퇴
     withdrawalProcess:function(){
-      var findId = this.$session.get('id')
+      var userData = this.$session.get('userData')
+      var findId = userData.userId
       this.$http.post('/users/withdrawal',
         {
           userId: findId
@@ -308,8 +309,7 @@ export default {
           this.$session.destroy()
           alert("탈퇴가 완료되었습니다.")
           this.$router.push('/')
-      })
-       
+      })     
     }
 
   },

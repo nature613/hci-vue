@@ -1,83 +1,78 @@
 <template>
   <div>
-      <v-layout column>
-        
-          <v-card>
-            <v-card-text>
+    <v-layout column>
+      <v-card>
+        <v-card-text>
 
-            
+          <v-layout column>
+            <v-flex>
+              <h3><b>{{deepContent.title}}</b></h3>
+            </v-flex>
+            <v-flex>
+              <p>{{deepContent.content}}</p>
+            </v-flex>
+            <v-flex>
+              <p><b>O</b> : {{deepContent.O}}</p>
+              <p><b>X</b> : {{deepContent.X}}</p>
+            </v-flex>
+            <v-layout v-if="deepContent.voter.includes(userId) === false" row>
+              <v-flex>
+                <v-btn @click="deepVoteO(deepContent._id)" block>{{deepContent.O}}(O)</v-btn>
+              </v-flex>
+              <v-flex>
+                <v-btn @click="deepVoteX(deepContent._id)" block>{{deepContent.X}}(X)</v-btn>
+              </v-flex>
+            </v-layout>
+            <v-layout v-if="deepContent.voter.includes(userId) === true" row>
+              <v-flex>
+                <v-btn disabled v-if="(deepContent.ovoter.includes(userId) === true)" @click="deepVoteO(deepContent._id)" block>{{deepContent.O}}(O) 선택함</v-btn>
+                <v-btn disabled v-if="(deepContent.ovoter.includes(userId) === false)" @click="deepVoteO(deepContent._id)" block>{{deepContent.O}}(O)</v-btn>
+              </v-flex>
+              <v-flex>
+                <v-btn disabled v-if="(deepContent.xvoter.includes(userId) === true)" @click="deepVoteX(deepContent._id)" color="primary" block>{{deepContent.X}}(X) 선택함</v-btn>
+                <v-btn disabled v-if="(deepContent.xvoter.includes(userId) === false)" @click="deepVoteX(deepContent._id)" block>{{deepContent.X}}(X)</v-btn>
+              </v-flex>
+            </v-layout>
+
+
+            <p v-if="deepContent.plusContent">
               <v-layout column>
-                <v-flex>
-                  <p><b>{{deepContent.title}}</b></p>
+                <v-flex text-md-center>
+                  <p><b>-투표자 추가 정보-</b></p>
+                  {{deepContent.plusContent}}
                 </v-flex>
-                <v-flex>
-                  <p>{{deepContent.content}}</p>
-                </v-flex>
-                <v-flex>
-                  <p><b>O</b> : {{deepContent.O}}</p>
-                  <p><b>X</b> : {{deepContent.X}}</p>
-                </v-flex>
-                <v-layout v-if="deepContent.voter.includes(userId) === false" row>
+                <v-layout v-if="(deepContent.plusOSetter.includes(userId) === false) && (deepContent.plusXSetter.includes(userId) === false)" row>
                   <v-flex>
-                    <v-btn @click="deepVoteO(deepContent._id)" block>{{deepContent.O}}(O)</v-btn>
+                    <v-btn block @click="setPlusO(deepContent._id)">{{deepContent.plusO}}</v-btn>
                   </v-flex>
                   <v-flex>
-                    <v-btn @click="deepVoteX(deepContent._id)" block>{{deepContent.X}}(X)</v-btn>
+                    <v-btn block @click="setPlusX(deepContent._id)">{{deepContent.plusX}}</v-btn>
                   </v-flex>
                 </v-layout>
-                <v-layout v-if="deepContent.voter.includes(userId) === true" row>
+                <v-layout v-if="(deepContent.plusOSetter.includes(userId) === true) || (deepContent.plusXSetter.includes(userId) === true)" row>
                   <v-flex>
-                    <v-btn disabled v-if="(deepContent.ovoter.includes(userId) === true)" @click="deepVoteO(deepContent._id)" block>{{deepContent.O}}(O) 선택함</v-btn>
-                    <v-btn disabled v-if="(deepContent.ovoter.includes(userId) === false)" @click="deepVoteO(deepContent._id)" block>{{deepContent.O}}(O)</v-btn>
+                    <v-btn disabled block v-if="(deepContent.plusOSetter.includes(userId) === true)" @click="setPlusO(deepContent._id)">{{deepContent.plusO}} 선택함</v-btn>
+                    <v-btn disabled block v-if="(deepContent.plusOSetter.includes(userId) === false)" @click="setPlusO(deepContent._id)">{{deepContent.plusO}}</v-btn>
                   </v-flex>
                   <v-flex>
-                    <v-btn disabled v-if="(deepContent.xvoter.includes(userId) === true)" @click="deepVoteX(deepContent._id)" color="primary" block>{{deepContent.X}}(X) 선택함</v-btn>
-                    <v-btn disabled v-if="(deepContent.xvoter.includes(userId) === false)" @click="deepVoteX(deepContent._id)" block>{{deepContent.X}}(X)</v-btn>
+                    <v-btn disabled block v-if="(deepContent.plusXSetter.includes(userId) === true)" @click="setPlusX(deepContent._id)">{{deepContent.plusX}} 선택함</v-btn>
+                    <v-btn disabled block v-if="(deepContent.plusXSetter.includes(userId) === false)" @click="setPlusX(deepContent._id)">{{deepContent.plusX}}</v-btn>
                   </v-flex>
                 </v-layout>
-
-
-                <p v-if="deepContent.plusContent">
-                  <v-layout column>
-                    <v-flex text-md-center>
-                      <p><b>-투표자 추가 정보-</b></p>
-                      {{deepContent.plusContent}}
-                    </v-flex>
-                    <v-layout v-if="(deepContent.plusOSetter.includes(userId) === false) && (deepContent.plusXSetter.includes(userId) === false)" row>
-                      <v-flex>
-                        <v-btn block @click="setPlusO(deepContent._id)">{{deepContent.plusO}}</v-btn>
-                      </v-flex>
-                      <v-flex>
-                        <v-btn block @click="setPlusX(deepContent._id)">{{deepContent.plusX}}</v-btn>
-                      </v-flex>
-                    </v-layout>
-                    <v-layout v-if="(deepContent.plusOSetter.includes(userId) === true) || (deepContent.plusXSetter.includes(userId) === true)" row>
-                      <v-flex>
-                        <v-btn disabled block v-if="(deepContent.plusOSetter.includes(userId) === true)" @click="setPlusO(deepContent._id)">{{deepContent.plusO}} 선택함</v-btn>
-                        <v-btn disabled block v-if="(deepContent.plusOSetter.includes(userId) === false)" @click="setPlusO(deepContent._id)">{{deepContent.plusO}}</v-btn>
-                      </v-flex>
-                      <v-flex>
-                        <v-btn disabled block v-if="(deepContent.plusXSetter.includes(userId) === true)" @click="setPlusX(deepContent._id)">{{deepContent.plusX}} 선택함</v-btn>
-                        <v-btn disabled block v-if="(deepContent.plusXSetter.includes(userId) === false)" @click="setPlusX(deepContent._id)">{{deepContent.plusX}}</v-btn>
-                      </v-flex>
-                    </v-layout>
-                  </v-layout>
-                </p>
-
-
-                <v-textarea
-                    id="comment"
-                    solo
-                    label="댓글"
-                    v-model="deepWriteComment"
-                  ></v-textarea>
-                  <v-btn block @click="deepAddComment">댓글 작성</v-btn>
-                  <v-btn block @click="goDeepList">글 목록 보기</v-btn>
               </v-layout>
-            </v-card-text>
-          </v-card>
-  
-      </v-layout>
+            </p>
+            <v-textarea
+                id="comment"
+                solo
+                label="댓글"
+                v-model="deepWriteComment"
+              ></v-textarea>
+              <v-btn block @click="deepAddComment">댓글 작성</v-btn>
+              <v-btn block @click="goDeepList">글 목록 보기</v-btn>
+          </v-layout>
+        </v-card-text>
+      </v-card>
+    </v-layout>
   </div>
 </template>
 <script>
@@ -101,6 +96,7 @@ export default {
     }
   },
   methods:{
+    //찬성표 투표
     deepVoteO:function(deepContentId){
       alert("test")
       var userData = this.$session.get('userData')    
@@ -123,7 +119,7 @@ export default {
         this.$router.go()
       })
     },
-    //추가정보 O
+    //추가정보 O 투표
     setPlusO:function(deepContentId){
       var userData = this.$session.get('userData')    
       this.$http.post(`/deep/set-plus-o/${deepContentId}`,this.parseUserData(userData))
@@ -132,8 +128,7 @@ export default {
         this.$router.go()
       })
     },
-
-    //추가정보 X
+    //추가정보 X 투표
     setPlusX:function(deepContentId){
       var userData = this.$session.get('userData')    
       this.$http.post(`/deep/set-plus-x/${deepContentId}`,this.parseUserData(userData))
@@ -243,16 +238,30 @@ export default {
         voterBirth : voterBirth,
       }
     },
-
+    //태어난 해를 입력하면 나이대를 알려줌
+    parseBirthData:function(birth){
+      if(userData.userBirth > 2009){
+        return "10세 미만"
+      }else if(userData.userBirth > 1999){
+        return "10대"
+      }else if(userData.userBirth > 1989){
+        return "20대"
+      }else if(userData.userBirth > 1979){
+        return "30대"
+      }else if(userData.userBirth > 1969){
+        return "40대"
+      }else{
+        return "50대 이상"
+      }
+    },
+    //댓글 추가
     deepAddComment:function(){
-      console.log(this.deepWriteComment)
-      console.log(this.$route.params.id)
       this.$http.post(`/deep/comment/${this.$route.params.id}`,
       {
         comment : this.deepWriteComment,
         author : this.userId,
         live : this.userLive,
-        birth : this.userBirth,
+        birth : this.parseBirthData(this.userBirth),
         job : this.userJob,
         gender : this.userGender
       }).then((response)=>{
@@ -261,6 +270,7 @@ export default {
         this.$router.push(`/deep-main/${this.$route.params.id}/1`)
       })
     },
+    //deep 글 목록 보기로 이동
     goDeepList : function(){
       this.$router.push('/deep')
     }
