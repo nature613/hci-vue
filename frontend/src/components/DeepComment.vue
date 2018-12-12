@@ -4,102 +4,140 @@
    
           <v-card>
             <v-card-text>
-              <v-layout row>
-                <v-flex>
-                  <v-btn block>ㅎㅇ</v-btn>
-                </v-flex>
-                <v-flex>
-                  <v-dialog v-model="dialog" persistent max-width="600px">
-                    <v-btn  block slot="activator" color="primary" dark>댓글 조건 검색</v-btn>
-                    <v-card>
-                      <v-card-title>
-                        <span class="headline">댓글 필터링</span>
-                      </v-card-title>
-                      <v-card-text>
-                        <v-container grid-list-md>
-                          <v-layout wrap>
-                            <v-flex xs12 sm6 md4>
-                              <v-text-field label="Legal first name*" required></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm6 md4>
-                              <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm6 md4>
-                              <v-text-field
-                                label="Legal last name*"
-                                hint="example of persistent helper text"
-                                persistent-hint
-                                required
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12>
-                              <v-text-field label="Email*" required></v-text-field>
-                            </v-flex>
-                            <v-flex xs12>
-                              <v-text-field label="Password*" type="password" required></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm6>
-                              <v-select
-                                :items="['0-17', '18-29', '30-54', '54+']"
-                                label="Age*"
-                                required
-                              ></v-select>
-                            </v-flex>
-                            <v-flex xs12 sm6>
-                              <v-autocomplete
-                                :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                                label="Interests"
-                                multiple
-                              ></v-autocomplete>
-                            </v-flex>
-                          </v-layout>
-                        </v-container>
-                        <small>*indicates required field</small>
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-                        <v-btn color="blue darken-1" flat @click="dialog = false">Save</v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
+              <v-radio-group v-model="radioGroup" row>
+                <v-radio label="모든 댓글" value="all"></v-radio>
+                <v-radio label="조건에 맞는 댓글" value="notAll"></v-radio>
+              </v-radio-group>
+              <v-tabs v-show="radioGroup === 'notAll'">
+                <v-tab
+                  id="test"
+                  v-for="i in tabList"
+                  :key="i"
+                >
+                  {{i.name}}
+                  
+                </v-tab>
+                <v-tab-item lazy="true">
+                  <v-card flat>
+                    <v-card-text>
+                      <v-layout row>
+                        <v-checkbox v-model="selectedGender" label="남자" value="남자"></v-checkbox>
+                        <v-checkbox v-model="selectedGender" label="여자" value="여자"></v-checkbox>
+                      </v-layout>
+                    </v-card-text>
+                  </v-card>
+                </v-tab-item>
+                <v-tab-item lazy="true">
+                  <v-card flat>
+                    <v-card-text>
+                      <v-layout row>
+                        <v-checkbox v-model="selectedBirth" label="10세 미만" value="10세 미만"></v-checkbox>
+                        <v-checkbox v-model="selectedBirth" label="10대" value="10대"></v-checkbox>
+                        <v-checkbox v-model="selectedBirth" label="20대" value="20대"></v-checkbox>
+                      </v-layout>
+                      <v-layout row>
+                        <v-checkbox v-model="selectedBirth" label="30대" value="30대"></v-checkbox>
+                        <v-checkbox v-model="selectedBirth" label="40대" value="40대"></v-checkbox>
+                        <v-checkbox v-model="selectedBirth" label="50대 이상" value="50대 이상"></v-checkbox>
+                      </v-layout>
+                    </v-card-text>
+                  </v-card>
+                </v-tab-item>
+                <v-tab-item lazy="true">
+                  <v-card flat>
+                    <v-card-text>
+                      <v-layout row>
+                        <v-checkbox v-model="selectedJob" label="무직" value="무직"></v-checkbox>
+                        <v-checkbox v-model="selectedJob" label="중학생" value="중학생"></v-checkbox>
+                        <v-checkbox v-model="selectedJob" label="고등학생" value="고등학생"></v-checkbox>
+                      </v-layout>
+                      <v-layout row>
+                        <v-checkbox v-model="selectedJob" label="대학생" value="대학생"></v-checkbox>
+                        <v-checkbox v-model="selectedJob" label="주부" value="주부"></v-checkbox>
+                        <v-checkbox v-model="selectedJob" label="회사원" value="회사원"></v-checkbox>
+                      </v-layout>
+                      <v-layout row>
+                        <v-checkbox v-model="selectedJob" label="자영업자" value="자영업자"></v-checkbox>
+                        <v-checkbox v-model="selectedJob" label="예체능계열" value="예체능계열"></v-checkbox>
+                        <v-checkbox v-model="selectedJob" label="기타" value="기타"></v-checkbox>
+                      </v-layout>
+                    </v-card-text>
+                  </v-card>
+                </v-tab-item>
+                <v-tab-item lazy="true">
+                  <v-card flat>
+                    <v-card-text>
+                      <v-layout row>
+                        <v-checkbox v-model="selectedLive" label="서울특별시" value="서울특별시"></v-checkbox>
+                        <v-checkbox v-model="selectedLive" label="경기도(인천 포함)" value="경기도(인천 포함)"></v-checkbox>
+                        <v-checkbox v-model="selectedLive" label="강원도" value="강원도"></v-checkbox>
+                      </v-layout>
+                      <v-layout row>
+                        <v-checkbox v-model="selectedLive" label="충청도(대전,세종 포함)" value="충청도(대전,세종 포함)"></v-checkbox>
+                        <v-checkbox v-model="selectedLive" label="경상도(대구,울산,부산 포함)" value="경상도(대구,울산,부산 포함)"></v-checkbox>
+                      </v-layout>
+                      <v-layout row>
+                        <v-checkbox v-model="selectedLive" label="전라도(광주 포함)" value="전라도(광주 포함)"></v-checkbox>
+                        <v-checkbox v-model="selectedLive" label="제주도" value="제주도"></v-checkbox>
+                      </v-layout>
+                    </v-card-text>
+                  </v-card>
+                </v-tab-item>
+              </v-tabs>
 
-                </v-flex>
-              </v-layout>
-              
-              
-              
+
               <v-card>
-                <v-data-table :items="commentList" class="elevation-1" hide-actions hide-headers :headers="headers">
+
+                <v-data-table 
+                  :items="commentList" class="elevation-1" 
+                  hide-actions 
+                  :headers="headers" 
+                  disable-initial-sort  
+                  v-show="radioGroup === 'all'">
+                  
                   <template slot="items" slot-scope="props">
                     <tr :active="props.selected" class="text-xs-center">
-                    
                       <td>{{props.item.comment}}</td>
-          
-                      
-                      <!-- <td @click="depost(props.item)">
-                        <v-btn flat>
-                          <v-icon>delete_sweep</v-icon>
-                        </v-btn>
-                      </td>
-                      <td @click="postview(props.item)">
-                        <v-btn flat>
-                          <v-icon>visibility</v-icon>
-                        </v-btn> 
-                      </td> -->
+                      <td id="testtest" @click="plusGood(props.item.comment)"><v-icon>thumb_up_alt</v-icon>{{props.item.good}}</td>
+                      <td id="testtest" @click="plusBad(props.item.comment)"><v-icon>thumb_down_alt</v-icon>{{props.item.bad}}</td>
                     </tr>
                   </template>
+
                 </v-data-table>
+
+
+                <v-data-table 
+                  :items="commentList" class="elevation-1" 
+                  hide-actions 
+                  :headers="headers" 
+                  disable-initial-sort  
+                  v-show="radioGroup === 'notAll'">
+                  
+                  <template slot="items" slot-scope="props">
+                    <tr 
+                      :active="props.selected" 
+                      class="text-xs-center"
+                      v-show="
+                      (selectedGender.includes(props.item.gender)) ||
+                      (selectedBirth.includes(props.item.birth)) ||
+                      (selectedJob.includes(props.item.job)) ||
+                      (selectedLive.includes(props.item.live))
+                      ">
+                      <td>{{props.item.comment}}</td>
+                      <td id="testtest" @click="plusGood(props.item.comment)"><v-icon>thumb_up_alt</v-icon>{{props.item.good}}</td>
+                      <td id="testtest" @click="plusBad(props.item.comment)"><v-icon>thumb_down_alt</v-icon>{{props.item.bad}}</td>
+                    </tr>
+                  </template>
+
+                </v-data-table>
+
+
               </v-card>
 
-
-
-
-
-
-
-
-
+              selectedGender  : {{selectedGender}}
+              selectedLive : {{selectedLive}}
+              selectedBirth : {{selectedBirth}}
+              selectedJob : {{selectedJob}}
             </v-card-text>
           </v-card>
       </v-layout>
@@ -119,22 +157,55 @@ export default {
     return{
       commentList:'',
       tabList : [
-        {name : "전체"},
         {name : "성별"},
         {name : "나이대"},
         {name : "직업"},
-        {name : "사는 곳"},
-        {name : "추가정보"}
+        {name : "사는 곳"}
       ],
+      headers:[
+        {
+          text : "내용",
+          sortable: false,
+          align: 'center',
+          value : 'comment'
+        },
+        {
+          text : '좋아요',
+          sortable: true,
+          value : 'good'
+        },
+        {
+          text : '별로에요',
+          sortable: true,
+          value : 'bad'
+        },
+      ],
+      pagination: {
+        descending : true
+      },
+      allCheckbox : true,
+      radioGroup : 'all',
+      selectedGender : [],
+      selectedLive : [],
+      selectedBirth : [],
+      selectedJob : []
     }
   },
   methods:{
-    // goDeepContent : function(){
-    //   this.$router.push(`/deep-content/${this.$route.params.id}`)
-    // },
-    // goDeepStats : function(){
-    //   this.$router.push(`/deep-stats/${this.$route.params.id}`)
-    // },
+    plusGood : function(content){
+      this.$http.post(`/deep/comment/${this.$route.params.id}/good`,{content : content}).then((response)=>{
+        this.commentList = response.data.commentList
+        this.$router.go()
+        this.$router.push(`/deep-main/${this.$route.params.id}/1`)
+      })
+    },
+    plusBad : function(content){
+      this.$http.post(`/deep/comment/${this.$route.params.id}/bad`,{content : content}).then((response)=>{
+        this.commentList = response.data.commentList
+        this.$router.go()
+        this.$router.push(`/deep-main/${this.$route.params.id}/1`)
+      })
+    }
   },
   mounted:function(){
     this.$http.post(`/deep/content/${this.$route.params.id}`).then((response)=>{
@@ -143,7 +214,11 @@ export default {
   }
 }
 </script>
-<style>
-
+<style scoped>
+  /* #testtest{
+    padding-right : 0px;
+    padding-left : 0px;
+    display : inline-block;
+  } */
 </style>
  

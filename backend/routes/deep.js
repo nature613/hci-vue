@@ -398,10 +398,60 @@ router.post('/comment/:id' ,function(req, res, next){
           commentList: 
           {
             comment : req.body.comment,
-            author :  req.body.author
+            author :  req.body.author,
+            good : 0,
+            bad : 0,
+            live : req.body.live,
+            birth : req.body.birth,
+            job : req.body.job,
+            gender : req.body.gender,
           }
         } 
       })
+    res.send("good")
+  })
+});
+
+
+router.post('/comment/:id/:status' ,function(req, res, next){
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readdeep")
+    }
+    const db = client.db("hci")
+    const deep = db.collection('deep')
+    var id = req.params.id
+    var id = new ObjectId(id);
+    var content = req.body.content;
+    if(req.params.status === "good"){
+      await deep.updateOne(
+        {
+          $and :[
+            {_id:id},
+            { "commentList": { $elemMatch: { "comment": content }}},
+          ]
+        }, 
+        {  
+          $inc :{
+            'commentList.$.good' : 1
+          }
+        })
+    }else if(req.params.status === "bad"){
+      await deep.updateOne(
+        {
+          $and :[
+            {_id:id},
+            { "commentList": { $elemMatch: { "comment": content }}},
+          ]
+        }, 
+        {  
+          $inc :{
+            'commentList.$.bad' : 1
+          }
+        })
+    }
+    
     res.send("good")
   })
 });

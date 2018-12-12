@@ -63,10 +63,12 @@ export default {
         {
           text : '댓글',
           sortable: false,
+          align: 'center'
         },
         {
           text : '통계',
           sortable: false,
+          align: 'center'
         }
       ],
       items : ''

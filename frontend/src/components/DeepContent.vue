@@ -72,7 +72,7 @@
                     v-model="deepWriteComment"
                   ></v-textarea>
                   <v-btn block @click="deepAddComment">댓글 작성</v-btn>
-                  
+                  <v-btn block @click="goDeepList">글 목록 보기</v-btn>
               </v-layout>
             </v-card-text>
           </v-card>
@@ -93,6 +93,10 @@ export default {
     return{
       deepContent: '',
       userId : '',
+      userLive : '',
+      userBirth : '',
+      userJob : '',
+      userGender : '',
       deepWriteComment : ''
     }
   },
@@ -105,6 +109,7 @@ export default {
         console.log(response)
         console.log(response.data)
         this.updateContent()
+        this.$router.go()
       })
     },
     //반대표 투표
@@ -115,6 +120,7 @@ export default {
         console.log(response)
         console.log(response.data)
         this.updateContent()
+        this.$router.go()
       })
     },
     //추가정보 O
@@ -123,6 +129,7 @@ export default {
       this.$http.post(`/deep/set-plus-o/${deepContentId}`,this.parseUserData(userData))
       .then((response)=>{
         this.updateContent()
+        this.$router.go()
       })
     },
 
@@ -131,8 +138,8 @@ export default {
       var userData = this.$session.get('userData')    
       this.$http.post(`/deep/set-plus-x/${deepContentId}`,this.parseUserData(userData))
       .then((response)=>{
-        alert("good")
         this.updateContent()
+        this.$router.go()
       })
     },
     //지금 페이지의 글 업데이트
@@ -243,16 +250,28 @@ export default {
       this.$http.post(`/deep/comment/${this.$route.params.id}`,
       {
         comment : this.deepWriteComment,
-        author : this.userId
+        author : this.userId,
+        live : this.userLive,
+        birth : this.userBirth,
+        job : this.userJob,
+        gender : this.userGender
       }).then((response)=>{
         alert("댓글이 작성되었습니다")
         this.$router.go()
+        this.$router.push(`/deep-main/${this.$route.params.id}/1`)
       })
+    },
+    goDeepList : function(){
+      this.$router.push('/deep')
     }
   },
   mounted:function(){
     var userData = this.$session.get('userData')    
     this.userId = userData.userId
+    this.userLive = userData.userLive,
+    this.userBirth = userData.userBirth,
+    this.userJob = userData.userJob,
+    this.userGender = userData.userGender,
     this.updateContent()
   }
 }

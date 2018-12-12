@@ -25,6 +25,7 @@
         <v-tab-item lazy="true">
           <DeepStats></DeepStats>
         </v-tab-item>
+        </v-tabs>
       </v-layout>
     </v-container>
     
