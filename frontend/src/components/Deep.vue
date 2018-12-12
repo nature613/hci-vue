@@ -12,7 +12,7 @@
           </v-btn>
         </v-flex>
 
-        <v-card>
+      <v-card>
         <v-data-table :items="deepList" class="elevation-1" hide-actions :headers="headers">
           <template slot="items" slot-scope="props">
             <tr :active="props.selected" class="text-xs-center">
@@ -63,10 +63,12 @@ export default {
         {
           text : '댓글',
           sortable: false,
+          align: 'center'
         },
         {
           text : '통계',
           sortable: false,
+          align: 'center'
         }
       ],
       items : ''

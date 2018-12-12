@@ -1,28 +1,17 @@
 <template>
   <div>
-    <!-- <v-container>
-      <v-layout column>
-        <v-flex xs12>
-          <SearchBar></SearchBar>
-        </v-flex>
-          <v-layout row>
-            <v-flex>
-              <router-link to="/me-content"><v-btn block>내가 쓴 글</v-btn></router-link>
-            </v-flex>
-            <v-flex>
-              <router-link to="/me-comment"><v-btn block color="secondary">내가 쓴 댓글</v-btn></router-link>
-            </v-flex>
-            <v-flex>
-              <router-link to="/me-vote"><v-btn block>내가 투표한 글</v-btn></router-link>
-            </v-flex>
-          </v-layout>
-
-
-      </v-layout>
-    </v-container> -->
-
-
-    내가 쓴 댓글
+    <v-card>
+        <v-data-table :items="myCommentList.slice().reverse()" class="elevation-1" hide-actions hide-headers>
+          <template slot="items" slot-scope="props">
+            <tr :active="props.selected" class="text-xs-center" >
+             
+              <td>{{props.item.comment}}</td>
+              <td @click="goDeepContent(props.item.contentId)"><u>본문보기</u></td>
+              
+            </tr>
+          </template>
+        </v-data-table>
+      </v-card>
   </div>
 </template>
 <script>
@@ -32,6 +21,24 @@ export default {
   name: 'MeComment',
   components:{
     SearchBar,
+  },
+  data:function(){
+    return{
+      myCommentList : '',
+    }
+  },
+  methods:{
+    getMyCommentList:function(){
+      this.$http.post(`/deep/my-comment/${this.$session.get('userData').userId }`).then((response)=>{
+        this.myCommentList = response.data
+      })
+    },
+    goDeepContent:function(contentId){
+      this.$router.push(`/deep-main/${contentId}/0`)
+    }
+  },
+  mounted:function(){
+    this.getMyCommentList()
   }
 }
 </script>

@@ -4,7 +4,7 @@ const auth = require('../auth.js')
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 
-/* GET users listing. */
+//로그인 과정
 router.post('/login', function(req, res, next) {
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
@@ -30,7 +30,7 @@ router.post('/login', function(req, res, next) {
     }    
   })
 });
-
+//db에 회원가입한 회원 등록해주는 과정
 router.post('/sign-process',function(req,res){
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
@@ -62,8 +62,7 @@ router.post('/sign-process',function(req,res){
     }
   })
 })
-
-
+//jwt이용해서 인증되는 것 시험해봄
 router.post('/me',function(req,res){
   console.log("hi")
   MongoClient.connect("mongodb://localhost:27017",
@@ -85,7 +84,7 @@ router.post('/me',function(req,res){
     res.json({user, accessLog})
   })
 }) 
-
+//id로 회원 찾아서 유저 정보 반횐
 router.post('/find',(req,res)=>{
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
@@ -100,7 +99,7 @@ router.post('/find',(req,res)=>{
     res.send(user)
   })
 })
-
+//회원 정보 수정
 router.post('/modify',(req,res)=>{
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
@@ -110,10 +109,11 @@ router.post('/modify',(req,res)=>{
     const db = client.db("hci")
     const people = db.collection('people')
     console.log(req.body)
-    await people.update({id : req.body.userId}, {$set:
+    console.log(req.body.userGender)
+    await people.update({userId : req.body.userId}, {$set:
       { 
         userName : req.body.userName,
-        userPw:req.body.userPw,
+        userPw: req.body.userPw,
         userGender : req.body.userGender,
         userBirth : req.body.userBirth,
         userJob : req.body.userJob,
@@ -123,7 +123,7 @@ router.post('/modify',(req,res)=>{
     res.send("modify complete")
   })
 })
-
+//회원 탈퇴 과정
 router.post('/withdrawal',(req,res)=>{
   MongoClient.connect("mongodb://localhost:27017",
   {useNewUrlParser:true},async(err,client)=>{
@@ -132,16 +132,10 @@ router.post('/withdrawal',(req,res)=>{
     }
     const db = client.db("hci")
     const people = db.collection('people')
-    console.log(req.body)
-    var u_id =  req.body.userId
-    await people.remove({id:u_id}) //usedata 삭제
-    await StupidGreatModel.remove({id:u_id})  //쓴 stupidgreat 삭제
-    await accountModel.remove({id:u_id})  //쓴 가계부 삭제
-    await boardModel.remove({id:u_id})  //쓴 글 삭제
+    console.log(req.body.userId)
+    await people.remove({userId:req.body.userId}) //userdata 삭제
     res.send("withdrawal complete")
-    res.send("modify complete")
   })
 })
-
 
 module.exports = router;

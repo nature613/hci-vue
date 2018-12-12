@@ -195,12 +195,17 @@
                   <v-tab-item lazy="true">
                     <v-card flat>
                       <v-card-text>
-                        <v-layout row>
+                        <v-layout row v-if="(item.plusContent !== '')"> 
                           <v-flex>
                             <PlusOPieChart :plusOvoteO="item.plusOvoteO" :plusOvoteX="item.plusOvoteX" :plusOContent="item.plusContent+item.plusO" :width="134" :height="230"></PlusOPieChart>
                           </v-flex>
                           <v-flex>
                             <PlusXPieChart :plusXvoteO="item.plusXvoteO" :plusXvoteX="item.plusXvoteX" :plusXContent="item.plusContent+item.plusX" :width="134" :height="230"></PlusXPieChart>
+                          </v-flex>
+                        </v-layout>
+                        <v-layout v-else>
+                          <v-flex>
+                            <p>글쓴이가 등록한 추가 정보가 없습니다.</p>
                           </v-flex>
                         </v-layout>
                         <!-- <p>-------투표자가 원하는 추가 정보-------</p>
@@ -219,7 +224,6 @@
             </v-card>
           </v-expansion-panel-content>
         </v-expansion-panel>
-        <GenderChart></GenderChart>
 
       </v-layout>
     </v-container>

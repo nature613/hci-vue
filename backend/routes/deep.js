@@ -21,6 +21,21 @@ router.post('/read', function(req, res, next) {
   })
 });
 
+router.post('/read/:id', function(req, res, next) {
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readMeDeep")
+    }
+    const db = client.db("hci")
+    const deep = db.collection('deep')
+    var id = req.params.id
+    console.log("내가 쓴 deep list 불러오기 ")
+    var deepList = await deep.find({author : id}).toArray()
+    res.send(deepList)
+  })
+});
+
 //deep 글 쓰기
 router.post('/write',(req,res)=>{
   MongoClient.connect("mongodb://localhost:27017",
@@ -388,6 +403,7 @@ router.post('/comment/:id' ,function(req, res, next){
     }
     const db = client.db("hci")
     const deep = db.collection('deep')
+    const comment = db.collection('comment')
     var id = req.params.id
     var id = new ObjectId(id);
     await deep.updateOne(
@@ -398,14 +414,110 @@ router.post('/comment/:id' ,function(req, res, next){
           commentList: 
           {
             comment : req.body.comment,
-            author :  req.body.author
+            author :  req.body.author,
+            good : 0,
+            bad : 0,
+            live : req.body.live,
+            birth : req.body.birth,
+            job : req.body.job,
+            gender : req.body.gender,
           }
         } 
+      })
+      await comment.insertOne({
+        comment : req.body.comment,
+        author : req.body.author,
+        contentId : req.body.contentId
       })
     res.send("good")
   })
 });
 
+
+router.post('/comment/:id/:status' ,function(req, res, next){
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readdeep")
+    }
+    const db = client.db("hci")
+    const deep = db.collection('deep')
+    var id = req.params.id
+    var id = new ObjectId(id);
+    var content = req.body.content;
+    if(req.params.status === "good"){
+      await deep.updateOne(
+        {
+          $and :[
+            {_id:id},
+            { "commentList": { $elemMatch: { "comment": content }}},
+          ]
+        }, 
+        {  
+          $inc :{
+            'commentList.$.good' : 1
+          }
+        })
+    }else if(req.params.status === "bad"){
+      await deep.updateOne(
+        {
+          $and :[
+            {_id:id},
+            { "commentList": { $elemMatch: { "comment": content }}},
+          ]
+        }, 
+        {  
+          $inc :{
+            'commentList.$.bad' : 1
+          }
+        })
+    }
+    
+    res.send("good")
+  })
+});
+
+
+router.post('/my-comment/:id' ,function(req, res, next){
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readdeep")
+    }
+    const db = client.db("hci")
+    const comment = db.collection('comment')
+    var id = req.params.id
+    var myCommentList = await comment.find(
+      { 
+       author : id
+      } 
+    ).toArray()
+    console.log(myCommentList)
+    res.send(myCommentList)
+  })
+});
+
+router.post('/vote/:id', function(req, res, next) {
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readSimple")
+    }
+    const db = client.db("hci")
+    const deep = db.collection('deep')
+    var id = req.params.id
+    console.log("내가 투표한 deep list 불러오기 ")
+    var deepList = await deep.find(
+      {
+        voter : id
+      }
+    ).toArray()
+    console.log("asdihjaslidjasdkajsldasjkadjaslkjdlka")
+    console.log(deepList)
+    console.log("asdihjaslidjasdkajsldasjkadjaslkjdlka")
+    res.send(deepList)
+  })
+});
 
 
 

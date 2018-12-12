@@ -22,6 +22,23 @@ router.post('/read', function(req, res, next) {
   })
 });
 
+router.post('/read/:id', function(req, res, next) {
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readSimple")
+    }
+    const db = client.db("hci")
+    const simple = db.collection('simple')
+    var id = req.params.id
+    console.log("내가 쓴 simple list 불러오기 ")
+    var simpleList = await simple.find({author : id}).toArray()
+    // console.log("simpleList " + simpleList);
+    // console.log(simpleList)
+    res.send(simpleList)
+  })
+});
+
 //simple 글 쓰기
 router.post('/write',(req,res)=>{
   MongoClient.connect("mongodb://localhost:27017",
@@ -342,6 +359,28 @@ router.post('/set-plus-x/:contentId', function(req, res, next) {
     res.send("good")
   })
 });
+
+
+router.post('/vote/:id', function(req, res, next) {
+  MongoClient.connect("mongodb://localhost:27017",
+  {useNewUrlParser:true},async(err,client)=>{
+    if(!err){
+      console.log("MongoDb Connected - readSimple")
+    }
+    const db = client.db("hci")
+    const simple = db.collection('simple')
+    var id = req.params.id
+    console.log("내가 투표한 simple list 불러오기 ")
+    var simpleList = await simple.find(
+      {
+        voter : id
+      }
+    ).toArray()
+    console.log(simpleList)
+    res.send(simpleList)
+  })
+});
+
 
 
 

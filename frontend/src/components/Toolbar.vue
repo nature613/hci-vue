@@ -22,7 +22,7 @@
           </v-list-tile-avatar>
 
           <v-list-tile-content>
-            <v-list-tile-title>님 안녕하세요!</v-list-tile-title>
+            <v-list-tile-title>{{userData.userName}}님 안녕하세요!</v-list-tile-title>
             <!-- <v-list-tile-title>{{userData.userName}}님 안녕하세요!</v-list-tile-title> -->
           </v-list-tile-content>
         </v-list-tile>
@@ -85,17 +85,8 @@ export default {
     }
   },
   created:function(){
-    console.log("test1")
-    console.log(this.$session.getAll())
-    console.log("Test2")
-    console.log(this.$session.get('jwt'))
-    console.log("test3")
-    console.log(this.$session.get('userData.userName'))
-    console.log("test4")
     this.jwt= this.$session.get('jwt')
     this.userData = this.$session.get('userData')
-    console.log(this.jwt)
-    console.log("test5")
     console.log(this.userData)
   } ,
 }
