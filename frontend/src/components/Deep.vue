@@ -71,7 +71,8 @@ export default {
           align: 'center'
         }
       ],
-      items : ''
+      items : '',
+      userId : ''
     }
   },
   methods:{

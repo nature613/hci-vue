@@ -11,7 +11,7 @@
             글쓰기 
           </v-btn>
         </v-flex>
-         <v-expansion-panel
+        <v-expansion-panel
           v-model="panel"
           expand
         >

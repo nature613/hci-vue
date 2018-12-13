@@ -283,7 +283,10 @@ export default {
     this.userBirth = userData.userBirth,
     this.userJob = userData.userJob,
     this.userGender = userData.userGender,
-    this.updateContent()
+     this.$http.post(`/deep/content/${this.$route.params.id}`).then((response)=>{
+        console.log(response.data)
+        this.deepContent = response.data
+    })
   }
 }
 </script>

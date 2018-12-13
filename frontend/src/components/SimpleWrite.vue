@@ -13,19 +13,19 @@
           <v-textarea 
           solo
           v-model="simpleWriteContent"
-          label="ex) 오늘 점심">
+          label="제목 : ex) 오늘 점심">
           </v-textarea>
         </v-flex>
         <v-flex>
           <v-text-field
-            label="ex) 짜장"
+            label="O : ex) 짜장"
             v-model="simpleWriteO"
             solo
           ></v-text-field>
         </v-flex>
         <v-flex>
           <v-text-field
-            label="ex) 짬뽕"
+            label="X : ex) 짬뽕"
             v-model="simpleWriteX"
             solo
           ></v-text-field>
