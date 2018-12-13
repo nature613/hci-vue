@@ -8,7 +8,7 @@
         </v-btn>
        </v-flex>
        <v-flex xs4>
-         <v-toolbar-title class="white--text"><v-btn flat href="/simple-deep">LOGO</v-btn></v-toolbar-title>
+         <v-toolbar-title class="white--text"><v-btn flat href="/simple-deep">Modoo</v-btn></v-toolbar-title>
        </v-flex>
        <v-flex xs4>
 

@@ -3,7 +3,7 @@
   <v-container text-xs-center>
     <v-layout column d-block align-center justify-center>
       <v-flex center ma-5>
-        <h1 >LOGO</h1>
+        <h1 >Modoo</h1>
       </v-flex>
       <v-flex>
         <v-form>
