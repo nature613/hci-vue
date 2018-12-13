@@ -1,6 +1,6 @@
 <template>
   <div>
-   <v-toolbar dark color="primary">
+   <v-toolbar dark id="toolbar">
     <v-btn @click="$router.go(-1)" icon>
       <v-icon>arrow_back</v-icon>
     </v-btn>
@@ -92,5 +92,8 @@ export default {
 }
 </script>
 <style>
+  #toolbar{
+    background-color : #10272F;
+  }
 
 </style>

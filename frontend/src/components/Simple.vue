@@ -295,7 +295,7 @@ export default {
         console.log(response)
         console.log(response.data)
         this.getSimpleList()
-        this.$router.go()
+        // this.$router.go()
       })
     },
     //반대표 투표
@@ -306,7 +306,7 @@ export default {
         console.log(response)
         console.log(response.data)
         this.getSimpleList()
-        this.$router.go()
+        // this.$router.go()
       })
     },
     genderAvg:function(){
@@ -414,7 +414,7 @@ export default {
       this.$http.post(`/simple/set-plus-o/${simpleContentId}`,this.parseUserData(userData))
       .then((response)=>{
         this.getSimpleList()
-        this.$router.go()
+        // this.$router.go()
       })
     },
 
@@ -424,7 +424,7 @@ export default {
       this.$http.post(`/simple/set-plus-x/${simpleContentId}`,this.parseUserData(userData))
       .then((response)=>{
         this.getSimpleList()
-        this.$router.go()
+        // this.$router.go()
       })
     }
   },

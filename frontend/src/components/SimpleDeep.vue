@@ -4,10 +4,10 @@
     <v-container>
       <v-layout id="simpleDeepLayout" row>
         <v-flex xs6>
-          <v-btn class="simpleDeepBtn" href="/simple" block>simple</v-btn>
+          <v-btn class="simpleDeepBtn" id="simpleBtn" href="/simple" block>simple</v-btn>
         </v-flex>
         <v-flex xs6>
-          <v-btn class="simpleDeepBtn" href="/deep" block >deep</v-btn>
+          <v-btn class="simpleDeepBtn" id="deepBtn" href="/deep" block >deep</v-btn>
         </v-flex>
       </v-layout>
      
@@ -46,6 +46,12 @@ export default {
   }
   .simpleDeepBtn{
     height:100%;
+  }
+  #simpleBtn{
+    background-color: #E4FFEB;
+  }
+  #deepBtn{
+    background-color: #FFDBD7;
   }
 
 </style>
