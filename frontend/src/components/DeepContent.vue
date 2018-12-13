@@ -98,7 +98,6 @@ export default {
   methods:{
     //찬성표 투표
     deepVoteO:function(deepContentId){
-      alert("test")
       var userData = this.$session.get('userData')    
       this.$http.post(`/deep/vote-o/${deepContentId}`,this.parseUserData(userData))
       .then((response)=>{
@@ -142,6 +141,7 @@ export default {
         this.$http.post(`/deep/content/${this.$route.params.id}`).then((response)=>{
         console.log(response.data)
         this.deepContent = response.data
+        this.$router.go()
       })
     },
     //userData 분석

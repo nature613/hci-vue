@@ -133,5 +133,15 @@ export default new Router({
       name: 'DeepComment',
       component: () => import('../components/DeepComment.vue'),
     },
+    {
+      path: '/search-result/:search',
+      name: 'SearchResult',
+      component: () => import('../components/SearchResult.vue')
+    },
+    {
+      path: '/search-process/:search',
+      name: 'SearchProcess',
+      component: () => import('../components/SearchProcess.vue')
+    }
   ]
 })

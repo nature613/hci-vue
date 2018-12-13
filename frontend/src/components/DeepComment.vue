@@ -86,8 +86,6 @@
               </v-tabs>
 
 
-              <v-card>
-
                 <v-data-table 
                   :items="commentList" class="elevation-1" 
                   hide-actions 
@@ -131,8 +129,6 @@
 
                 </v-data-table>
 
-
-              </v-card>
             </v-card-text>
           </v-card>
       </v-layout>

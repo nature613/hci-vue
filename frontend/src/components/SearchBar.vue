@@ -26,7 +26,8 @@ export default {
         this.search = ''
     },
     searchContent(){
-
+      alert("test")
+      this.$router.push(`/search-process/${this.search}`)
     }
   }
 }
